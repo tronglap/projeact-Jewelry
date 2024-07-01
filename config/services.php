@@ -32,9 +32,9 @@ return [
     ],
 
     'google' => [
-        'client_id' => env('GOOGLE_CLIENT_ID', '788087030418-no10sjiv805e3kmjmhu6fr2p3715vsoj.apps.googleusercontent.com'),
-        'client_secret' => env('GOOGLE_CLIENT_SECRET', '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'),
-        'redirect' => env('GOOGLE_RETURN_URL', 'http://127.0.0.1:8000/google/login/'),
+        'client_id' => env('GOOGLE_CLIENT_ID'),
+        'client_secret' => env('GOOGLE_CLIENT_SECRET'),
+        'redirect' => env('GOOGLE_RETURN_URL'),
     ],
 
 ];
