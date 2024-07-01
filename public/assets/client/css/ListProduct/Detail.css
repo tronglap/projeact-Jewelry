@@ -1,0 +1,274 @@
+.DetailProduct {
+    background-color: white;
+}
+
+.DetailProduct .box_detail {
+    margin-top: 5%;
+}
+
+.DetailProduct .box_detail .container .row .col-lg-6 .thumb {
+    width: 70%;
+}
+
+.DetailProduct .box_detail .related {
+    padding: 100px 0;
+}
+
+.DetailProduct .box_detail .container .row .col-lg-6 .infor .name {
+    font-weight: 36px;
+    font-family: var(--font-secondary);
+    font-weight: 400;
+    margin-bottom: 10px;
+    text-transform: capitalize;
+    letter-spacing: 0;
+    line-height: 1.35;
+}
+
+.DetailProduct .box_detail .container .row .col-lg-6 .infor .material {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-start;
+    font-size: 14px;
+    text-transform: capitalize;
+    color: var(--color-text);
+    line-height: 1.5;
+    margin-bottom: .45rem;
+}
+
+.DetailProduct .box_detail .container .row .col-lg-6 .infor .price {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    line-height: 1.5;
+    letter-spacing: 0;
+    color: var(--color-secondary);
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 1.5em;
+}
+
+.DetailProduct .box_detail .container .row .col-lg-6 .infor .price .discount {
+    display: none;
+    font-weight: 700;
+    color: var(--color-secondary);
+    font-size: 18px;
+}
+
+.DetailProduct .box_detail .container .row .col-lg-6 .infor .discount.active {
+    display: block;
+}
+
+.DetailProduct .box_detail .container .row .col-lg-6 .infor .price .cost.active {
+    color: var(--color-secondary);
+    font-weight: 500;
+    text-decoration: line-through;
+    font-size: 14px;
+}
+
+.DetailProduct .box_detail .container .row .col-lg-6 .infor .cost {
+    font-weight: 700;
+    color: var(--color-secondary);
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.DetailProduct .box_detail .container .row .col-lg-6 .infor .instock {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+}
+
+.DetailProduct .box_detail .container .row .col-lg-6 .infor .instock {
+    font-family: var(--font-secondary);
+    font-weight: 400;
+    line-height: 1.35;
+    letter-spacing: 0;
+    font-size: 12px;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    color: #4eba59;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.5);
+    position: relative;
+}
+
+.DetailProduct .box_detail .container .row .col-lg-6 .infor .instock::before {
+    content: "";
+    display: block;
+    background-color: #4eba59;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    top: 3px;
+    left: 2px;
+    position: absolute;
+}
+
+.DetailProduct .box_detail .container .row .col-lg-6 .infor .outstock {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+}
+
+.DetailProduct .box_detail .container .row .col-lg-6 .infor .outstock {
+    font-family: var(--font-secondary);
+    font-weight: 400;
+    line-height: 1.35;
+    letter-spacing: 0;
+    font-size: 12px;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    color: rgb(255, 0, 0);
+    border-bottom: 1px solid rgba(128, 128, 128, 0.5);
+    position: relative;
+}
+
+.DetailProduct .box_detail .container .row .col-lg-6 .infor .outstock::before {
+    content: "";
+    display: block;
+    background-color: rgb(255, 0, 0);
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    top: 3px;
+    left: 2px;
+    position: absolute;
+}
+
+.DetailProduct .box_detail .container .row .col-lg-6 .infor .shortdesc {
+    line-height: 1.5;
+    margin-bottom: 1.5em;
+}
+
+.DetailProduct .box_detail .container .row .col-lg-6 .infor .icon {
+    margin-bottom: 2.2rem;
+}
+
+.DetailProduct .box_detail .container .row .col-lg-6 .infor .icon .text-color {
+    font-size: 14px;
+    color: var(--color-text)
+}
+
+
+.DetailProduct .box_detail .container .row .col-lg-6 .addtocart .count {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid #e3e3e3;
+    width: -moz-fit-content;
+    /* Hỗ trợ cho Firefox */
+    width: fit-content;
+    /* Hỗ trợ cho các trình duyệt khác */
+}
+
+.DetailProduct .box_detail .container .row .col-lg-6 .addtocart .count .input {
+    background-color: initial;
+    border: none;
+    font-size: 14px;
+    font-weight: 600;
+    margin: 0 auto;
+    outline: none;
+    padding: 13px 0;
+    text-align: center;
+}
+
+.DetailProduct .box_detail .container .row .col-lg-6 .addtocart .count .click {
+    padding: 10px;
+    border: none;
+    background-color: transparent;
+    transition: 0.5s linear;
+}
+
+.DetailProduct .box_detail .container .row .col-lg-6 .addtocart .count .click:active {
+    background-color: gray
+}
+
+.DetailProduct .box_detail .container .row .col-lg-6 .addtocart .col-lg-4 .shop-now {
+    margin: 0;
+    border-radius: 2px;
+}
+
+.DetailProduct .box_detail .container .product-infor {
+    margin: 2% 0;
+    padding: 5% 2%;
+}
+
+.DetailProduct .box_detail .container .product-infor .col-lg-12 .tab .detail-tab {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5%;
+    margin-bottom: 5%;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.DetailProduct .box_detail .container .product-infor .col-lg-12 .tab .detail-tab .title-tab {
+    border: none;
+    background-color: transparent;
+    font-weight: bold;
+    color: var(--color-text);
+    transition: 0.3s linear;
+    font-size: 14px;
+    font-size: .875rem;
+}
+
+.DetailProduct .box_detail .container .product-infor .col-lg-12 .tab .detail-tab .title-tab.active {
+    color: var(--color-primary);
+}
+
+.DetailProduct .box_detail .container .product-infor .col-lg-12 .tab .detail-tab .title-tab.active::after {
+    width: 100%;
+}
+
+.DetailProduct .box_detail .container .product-infor .col-lg-12 .tab .detail-tab .title-tab::after {
+    display: block;
+    content: "";
+    width: 0;
+    height: 2px;
+    background-color: var(--color-primary);
+    margin-top: 20px;
+    transition: 0.2s linear;
+}
+
+.DetailProduct .box_detail .container .product-infor .col-lg-12 .tab .detail-tab .title-tab:hover {
+    color: var(--color-primary);
+}
+
+.DetailProduct .box_detail .container .product-infor .col-lg-12 .tab .detail-tab .title-tab:hover::after {
+    width: 100%;
+}
+
+/* .DetailProduct .box_detail .container .product-infor .col-lg-12 .tab .tab-content .tab-pane .information {
+    border: 1px solid black;
+    width: 100%;
+} */
+
+.tab-pane table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.tab-pane th,
+.tab-pane td {
+    border: 1px solid #ddd;
+    padding: 1em 1.41577975em;
+    text-align: left;
+    word-break: break-all;
+}
+
+.tab-pane .information tr th {
+    font-size: 14px;
+    font-size: .875rem;
+    font-weight: 600;
+    line-height: 1.35;
+    text-transform: capitalize;
+}
+
+
+.toast-content img{
+    width: 75px;
+    height: 75px;
+}

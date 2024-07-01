@@ -1,0 +1,47 @@
+.wwd {
+    width: 100%;
+    margin-top: 10%;
+    margin-bottom: 10%;
+}
+
+.wwd .left {
+    margin-right: 10%;
+}
+
+.wwd .left img {
+    border-radius: 50% 0 0 0;
+    transition: 0.3s linear;
+    cursor: pointer;
+}
+
+.wwd .left img:hover {
+    transform: scale(1.02);
+}
+
+.wwd .text .title {
+    color: var(--color-primary);
+    font-weight: 500;
+    letter-spacing: 3.5px;
+    margin-bottom: 30px;
+}
+
+.wwd .text h1 {
+    font-family: var(--font-secondary);
+    font-size: 50px;
+    text-transform: capitalize;
+    line-height: 60px;
+}
+
+.wwd .text p {
+    font-size: 18px;
+    margin-bottom: 50px;
+}
+
+.wwd .right .image-wwd {
+    border-radius: 0 0 50% 0;
+    transition: 0.5s linear;
+}
+
+.wwd .right .image-wwd:hover {
+    transform: scale(1.02);
+}

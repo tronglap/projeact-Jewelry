@@ -1,0 +1,165 @@
+.Card_item {
+    text-align: center;
+    position: relative;
+    width: 100%;
+    text-align: center;
+    overflow: hidden;
+    transition: 0.5s ease;
+    margin-right: 20px;
+    /* padding-right: 20px; */
+}
+
+.Card_item .thumb {
+    display: block;
+    position: relative;
+    transition: clip-path .6s cubic-bezier(.17, .67, .83, .67), filter .8s ease;
+    --Media_ClipPath: inset(0);
+    clip-path: var(--Media_ClipPath);
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.Card_item:hover .thumb {
+    --Media_ClipPath: inset(0 round 25vw 25vw 0 0);
+    transition: clip-path 1.6s cubic-bezier(.17, .67, .83, .67)
+}
+
+.Card_item .thumb img {
+    transition: 0.5s ease;
+    position: relative;
+}
+
+.Card_item .thumb img:first-child {
+    opacity: 1;
+    transition: 0.3s linear;
+
+}
+
+.Card_item:hover .thumb img:first-child {
+    opacity: 0;
+}
+
+.Card_item .thumb img:last-child {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: 0.3s linear;
+}
+
+.Card_item:hover .thumb img:last-child {
+    opacity: 1;
+    display: block;
+    transform: scale(1.1);
+}
+
+.Card_item .sale {
+    display: none;
+    width: 20%;
+    color: white;
+    padding: 2%;
+    font-weight: 400;
+    font-size: 90%;
+    top: 10px;
+    left: 10px;
+    background-color: var(--color-primary);
+    position: absolute;
+    transition: 0.2s linear;
+    z-index: 1;
+}
+
+.Card_item .sale::before {
+    content: "SALE";
+}
+
+.Card_item .sale.active {
+    display: block;
+}
+
+.Card_item:hover .sale.active {
+    opacity: 0;
+}
+
+.Card_item .info {
+    margin-top: 10px;
+}
+
+.Card_item .info .cate {
+    color: var(--color-primary);
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.35;
+}
+
+.Card_item .info .name {
+    font-size: 20px;
+    color: var(--color-secondary);
+    text-transform: capitalize;
+    transition: 0.2s ease;
+}
+
+.Card_item .info .name:hover {
+    color: var(--color-primary)
+}
+
+.Card_item .info .material {
+    color: var(--color-text);
+    text-transform: capitalize;
+    font-size: 14px
+}
+
+.Card_item .info .price {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.Card_item .info .price .discount {
+    display: none;
+    font-weight: 700;
+    color: var(--color-secondary)
+}
+
+.Card_item .info .price .discount.active {
+    display: block;
+}
+
+.Card_item .info .price .cost.active {
+    color: var(--color-secondary);
+    font-weight: 500;
+    text-decoration: line-through;
+    font-size: 14px;
+}
+
+.Card_item .info .price .cost {
+    font-weight: 700;
+    color: var(--color-secondary);
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.Card_item .info .price .soldOut {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.5);
+    z-index: 10;
+}
+
+.Card_item .info .price .soldOut::before {
+    display: block;
+    content: "Sold Out";
+    position: absolute;
+    top: 35%;
+    left: 25%;
+    font-size: 25px;
+    border: 1px solid red;
+    padding: 15px;
+    font-weight: 600;
+    transform: rotate(-45deg);
+    color: red
+}

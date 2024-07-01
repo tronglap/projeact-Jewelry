@@ -1,0 +1,70 @@
+.Banner {
+    position: relative;
+    margin-bottom: 5%;
+}
+
+.Banner::after {
+    content: "";
+    display: block;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.Banner .content {
+    text-align: center;
+    width: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    position: absolute;
+    z-index: 2;
+
+}
+
+.Banner .content .title {
+    font-size: 60px;
+    font-family: var(--font-secondary);
+    color: white;
+}
+
+.Banner .content .link_header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Banner .content .link_header .Home,
+.Banner .content .link_header .Shop {
+    text-decoration: none;
+    color: white;
+    font-weight: 400;
+    font-size: 15px;
+    transition: 0.2s ease;
+}
+
+.Banner .content .link_header .Home:hover,
+.Banner .content .link_header .Home:hover .fa-house {
+    color: var(--color-primary)
+}
+
+
+.Banner .content .link_header .Shop:hover {
+    color: var(--color-primary)
+}
+
+.Banner .content .link_header .Home .fa-house {
+    margin-right: 10px;
+    color: white;
+    transition: 0.2s ease
+}
+
+.Banner .content .link_header .icon .fa-angle-right {
+    color: white;
+    transition: 0.2s ease
+}
+
+.Banner .content .link_header .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 10px;
+}

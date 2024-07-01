@@ -1,0 +1,86 @@
+.Card_news {
+    width: 90%;
+    margin: 0 auto;
+    cursor: pointer;
+}
+
+.Card_news .thumb {
+    margin-bottom: 3%;
+    overflow: hidden;
+}
+
+.Card_news .thumb img {
+    transition: 0.3s linear;
+}
+
+.Card_news .thumb:hover img {
+    transform: scale(1.1);
+}
+
+.Card_news .infor {
+    text-align: center;
+}
+
+.Card_news .infor .date p {
+    font-size: 14px;
+    text-transform: capitalize;
+    color: var(--color-lighter);
+    transition: 0.5s ease
+}
+
+.Card_news .infor .date p:hover {
+    color: var(--color-primary)
+}
+
+.Card_news .infor .title h4 {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+    transition: 0.3s ease;
+}
+
+.Card_news .infor .title h4:hover {
+    color: var(--color-primary)
+}
+
+.Card_news .infor .content {
+    max-height: 5.5em;
+    overflow: hidden;
+}
+
+.Card_news .infor .content .description {
+    display: -webkit-box;
+    color: var(--color-text);
+    font-size: 1em;
+    line-height: 1.5;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+
+}
+
+.Card_news .infor .view {
+    color: var(--color-dark);
+    font-weight: bold;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.3;
+    text-transform: uppercase;
+    transition: 0.3s linear;
+    margin-top: 12%;
+}
+
+.Card_news .infor .view:hover {
+    color: var(--color-primary)
+}
+
+@keyframes zoom_news {
+    0% {
+        transform: scale(1);
+    }
+
+    100% {
+        transform: scale(1.1);
+    }
+}

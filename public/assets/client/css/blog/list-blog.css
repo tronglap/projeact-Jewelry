@@ -1,0 +1,86 @@
+.blog .container .row .col-lg-8 .list-blog .blog-item {
+    margin-bottom: 30px;
+    padding-bottom: 30px;
+    position: relative;
+    border-bottom: none;
+}
+
+.blog .container .row .col-lg-8 .list-blog .blog-item .thumb {
+    overflow: hidden;
+    margin-bottom: 30px;
+}
+
+.blog .container .row .col-lg-8 .list-blog .blog-item .thumb .image-blog {
+    transition: 0.3s ease-in-out;
+}
+
+.blog .container .row .col-lg-8 .list-blog .blog-item .thumb .image-blog:hover {
+    transform: scale(1.05);
+}
+
+.blog .container .row .col-lg-8 .list-blog .blog-item .blog-content .created-at {
+    text-transform: capitalize;
+    line-height: 22px;
+    font-size: 14px;
+    font-size: .875rem;
+    color: var(--color-lighter);
+    margin-bottom: 8px;
+}
+
+.blog .container .row .col-lg-8 .list-blog .blog-item .blog-content .blog-title {
+    font-size: 36px;
+    font-size: 2.25rem;
+    font-family: var(--font-secondary);
+    font-weight: 400;
+    line-height: 1.35;
+    margin-bottom: 23px;
+}
+
+.blog .container .row .col-lg-8 .list-blog .blog-item .blog-content .blog-title a {
+    color: var(--color-secondary);
+    -ms-transition: all .3s ease;
+    -o-transition: all .3s ease;
+    -moz-transition: all .3s ease;
+    -webkit-transition: all .3s ease;
+    transition: all .3s ease;
+}
+
+.blog .container .row .col-lg-8 .list-blog .blog-item .blog-content .blog-title a:hover {
+    color: var(--color-primary);
+}
+
+.blog .container .row .col-lg-8 .list-blog .blog-item .blog-content .blog-description-short {
+    color: var(--color-text);
+    font-weight: 400;
+    line-height: 1.5;
+    font-size: 16px;
+    text-rendering: optimizeLegibility;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+    text-align: left;
+}
+
+.blog .container .row .col-lg-8 .list-blog .blog-item .blog-content .more-link {
+    margin: 37px 0 0;
+}
+
+.blog .container .row .col-lg-8 .list-blog .blog-item .blog-content .more-link .view-more {
+    display: inline-flex;
+    align-items: center;
+    font-size: 13px;
+    font-size: .8125rem;
+    font-weight: 600;
+    line-height: 1.3333333333;
+    text-transform: uppercase;
+    color: var(--color-secondary);
+    position: relative;
+    padding-right: 10px;
+    transition: all .3s;
+    text-decoration: underline;
+}
+
+.blog .container .row .col-lg-8 .list-blog .blog-item .blog-content .more-link .view-more:hover {
+    color: var(--color-primary);
+}

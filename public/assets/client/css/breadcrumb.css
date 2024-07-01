@@ -1,0 +1,45 @@
+.link_header {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 2% 0;
+}
+
+.link_header .Home,
+.link_header .Shop {
+    line-height: 24px;
+    text-decoration: none;
+    color: var(--color-text);
+    font-weight: 400;
+    font-size: 14px;
+    transition: 0.2s ease;
+}
+
+.link_header .Shop {
+    color: var(--color-primary)
+}
+
+.link_header .Home:hover,
+.link_header .Home:hover i {
+    color: var(--color-primary)
+}
+
+.link_header .Home .fa-house {
+    margin-right: 10px;
+    color: var(--color-text);
+    transition: 0.2s ease;
+    font-size: 13px;
+}
+
+.link_header .icon .fa-angle-right {
+    color: var(--color-text);
+    transition: 0.2s ease;
+    font-size: 13px;
+}
+
+.link_header .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 10px;
+}

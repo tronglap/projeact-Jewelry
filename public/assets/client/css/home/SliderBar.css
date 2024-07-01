@@ -1,0 +1,180 @@
+.banner img {
+    height: 150vh;
+    object-fit: cover;
+    transition: 0.2s linear;
+    animation: zoom 10s linear forwards;
+}
+
+@keyframes zoom {
+    0% {
+        transform: scale(1);
+    }
+
+    100% {
+        transform: scale(1.1);
+    }
+
+}
+
+.banner {
+    position: relative;
+    z-index: 0;
+}
+
+.banner .slide-1 {
+    background-color: #f8f6f4
+}
+
+.banner .slide-1::after {
+    content: "";
+    display: block;
+    width: 85%;
+    height: 100%;
+    border-radius: 40% 0 0 50%;
+    top: 0;
+    right: 0;
+    background-color: #f6f1eb;
+    position: absolute;
+    z-index: -2;
+    transition: 0.2s ease;
+    animation: border_slide_1 6s ease-out infinite alternate
+}
+
+@keyframes border_slide_1 {
+    0% {
+        transform: scale(1);
+        border-radius: 40% 0 0 50%;
+    }
+
+    25% {
+        transform: scale(1.05);
+        border-radius: 30% 0 0 60%;
+    }
+
+    50% {
+        transform: scale(1.1);
+        border-radius: 35% 0 0 65%;
+    }
+
+    75% {
+        transform: scale(1.05);
+        border-radius: 45% 0 0 55%;
+    }
+
+    100% {
+        transform: scale(1.03);
+        border-radius: 50% 0 0 45%;
+    }
+}
+
+.banner .slide-1::before {
+    content: "";
+    display: block;
+    width: 85%;
+    height: 100%;
+    border-radius: 40% 0 0 50%;
+    top: 0;
+    left: 0;
+    /* background-image: url(../../assets/banner/slide_1_deco.png); */
+    background-image: url(../../../assets/client/images/banner/slide_1_deco.png);
+    background-repeat: no-repeat;
+    position: absolute;
+    z-index: -1;
+    transition: 0.5s ease;
+    animation: zoom_line 10s linear infinite alternate;
+}
+
+@keyframes zoom_line {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.banner .carousel-control-next,
+.banner .carousel-control-prev {
+    height: 50px;
+    top: 50%;
+    width: 50px;
+    margin: 0 50px;
+    transition: 0.2s linear;
+    background-color: rgb(0, 0, 0, 0.3)
+}
+
+.banner .carousel-control-next-icon,
+.banner .carousel-control-prev-icon {
+    color: var(--color-secondary)
+}
+
+.banner .carousel-control-next:hover,
+.banner .carousel-control-prev:hover {
+    background-color: var(--color-primary)
+}
+
+.banner .carousel-item .carousel-caption {
+    color: var(--color-secondary);
+    text-align: left;
+    left: 10%;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.banner .carousel-item .carousel-caption h3 {
+    font-family: 'Prata', 'sans-serif';
+    font-size: 100px;
+    width: 50%;
+    opacity: 0;
+    transition: 0.5s linear;
+}
+
+.banner .carousel-item.active .carousel-caption h3 {
+    animation: fadedIn 0.5s ease-out forwards;
+}
+
+.banner .carousel-item .carousel-caption p {
+    font-size: 20px;
+    margin-top: 50px;
+    width: 30%;
+    opacity: 0;
+    transition: 0.5s linear;
+}
+
+.banner .carousel-item.active .carousel-caption p {
+    animation: fadedIn 0.5s ease-out 0.5s forwards;
+}
+
+.banner .carousel-item .carousel-caption button {
+    opacity: 0;
+}
+
+.banner .carousel-item.active .carousel-caption button {
+    animation: fadedIn 0.5s ease-out 1s forwards;
+}
+
+@keyframes fadedIn {
+    0% {
+        opacity: 0;
+        margin-left: -500px;
+    }
+
+    100% {
+        opacity: 1;
+        margin-left: 0;
+    }
+}
+
+@keyframes fadeOut {
+    50% {
+        opacity: 0;
+        margin-left: 100px;
+    }
+}

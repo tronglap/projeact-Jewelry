@@ -1,0 +1,49 @@
+.container .Template {
+    margin: 5% 0;
+    width: 90%;
+}
+
+.container .Template .form .form-title {
+    margin-bottom: 10%;
+}
+
+.container .Template .form .a {
+    color: var(--color-secondary);
+    transition: 0.5s ease-in-out;
+}
+
+.container .Template .form .a:hover {
+    color: var(--color-primary);
+}
+
+.btn-submit {
+    width: 100%;
+    border-radius: 2px;
+}
+
+.btn-submit:hover {
+    box-shadow: inset 550px 0 0 0 var(--color-primary);
+}
+
+.btn-login-google {
+    width: 100%;
+    border-radius: 2px;
+}
+
+.btn-login-google:hover {
+    box-shadow: inset 550px 0 0 0 var(--color-primary);
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.form-title {
+    font-family: var(--font-secondary);
+}
+
+.line{
+    margin-top: 50px;
+}

@@ -1,0 +1,30 @@
+.ToTop {
+    background-color: rgb(0, 0, 0);
+    border-radius: 50%;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 990;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.5s ease-in-out;
+    transform: scale(0);
+    transition: 0.3s linear;
+}
+
+.ToTop .thumb {
+    transform: rotate(180deg);
+    padding: 15px;
+}
+
+.ToTop.visible {
+    visibility: visible;
+    opacity: 1;
+    transform: scale(1);
+}

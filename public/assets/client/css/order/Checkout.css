@@ -1,0 +1,208 @@
+.CheckOut .link_header {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.CheckOut .link_header .Home,
+.CheckOut .link_header .Shop {
+    line-height: 24px;
+    text-decoration: none;
+    color: var(--color-text);
+    font-weight: 400;
+    font-size: 14px;
+    transition: 0.2s ease;
+}
+
+.CheckOut .link_header .Shop {
+    color: var(--color-primary)
+}
+
+.CheckOut .link_header .Home:hover,
+.CheckOut .link_header .Home:hover i {
+    color: var(--color-primary)
+}
+
+.CheckOut .link_header .Home i,
+.CheckOut .link_header .icon i {
+    margin-right: 10px;
+    color: var(--color-text);
+    transition: 0.2s ease;
+    font-size: 13px;
+}
+
+.CheckOut .link_header .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 10px;
+}
+
+.CheckOut .box_checkout {
+    display: none;
+    margin: 10% 0;
+}
+
+.CheckOut .box_checkout.active {
+    display: block;
+}
+
+.CheckOut .noti{
+    display: none;
+}
+
+.CheckOut .noti.active {
+    display: block;
+}
+
+.CheckOut .box_checkout .billing-fields h2 {
+    font-size: 28px;
+    font-family: 'Prata', sans-serif;
+    margin-bottom: 0.5em;
+    font-weight: 400;
+    line-height: 1.35;
+}
+
+.CheckOut .box_checkout .billing-fields .input-text label {
+    display: block;
+    font-weight: 400;
+    color: var(--color-secondary);
+    margin-bottom: .5em;
+}
+
+.CheckOut .box_checkout .billing-fields .input-text input,
+.CheckOut .box_checkout .billing-fields .input-text textarea {
+    width: 100%;
+    padding: 1.25em 1.85em;
+    background-color: #DADADA20;
+    margin-bottom: 1.5em;
+    border: 1px solid #E3E3E3;
+    box-sizing: border-box;
+    font-weight: normal;
+    font-size: 13px;
+    outline: 0;
+    transition: all ease-in-out 0.3s;
+    border-radius: 0;
+}
+
+.CheckOut .box_checkout .billing-fields .input-text .title-note{
+    font-family: var(--font-secondary);
+}
+
+
+.CheckOut .box_checkout .bill {
+    text-align: left;
+    padding: 30px 30px 40px;
+    background-color: #F8F6F4;
+    border: 6px solid #E3E3E3;
+    border-radius: 5px;
+    color: var(--color-secondary)
+}
+
+.CheckOut .box_checkout .bill .cart-total h2 {
+    font-size: 28px;
+    font-family: 'Prata', sans-serif;
+    margin-bottom: 15px;
+    font-weight: 400;
+}
+
+.CheckOut .box_checkout .bill .total-product,
+.CheckOut .box_checkout .bill .total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 18px;
+    padding: 1em 0;
+    font-weight: 600;
+}
+
+.CheckOut .box_checkout .bill .list-product {
+    padding: 20px 0;
+}
+
+.CheckOut .box_checkout .bill .total {
+    margin: 5% 0
+}
+
+.CheckOut .box_checkout .bill .total .price {
+    font-size: 24px;
+    color: var(--color-primary);
+    font-weight: 600;
+}
+
+.CheckOut .box_checkout .bill .proceed-to-checkout {
+    outline: none;
+    text-align: center;
+}
+
+.CheckOut .box_checkout .bill .proceed-to-checkout .title{
+    text-align: left;
+}
+
+.CheckOut .box_checkout .bill .proceed-to-checkout .selectPayment {
+    margin: 10px 0;
+}
+
+.CheckOut .box_checkout .bill .proceed-to-checkout .selectPayment .checkout__input__checkbox label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 5px 0;
+    cursor: pointer;
+}
+
+.CheckOut .box_checkout .bill .proceed-to-checkout .selectPayment .checkout__input__checkbox label .thumb {
+    width: 50px;
+}
+
+.CheckOut .box_checkout .bill .proceed-to-checkout .selectPayment .checkout__input__checkbox label .thumb img {
+    width: 100%;
+    height: auto;
+}
+
+.CheckOut .box_checkout .bill .proceed-to-checkout .selectPayment .checkout__input__checkbox input[type="checkbox"] {
+    display: none;
+}
+
+.CheckOut .box_checkout .bill .proceed-to-checkout .selectPayment .checkout__input__checkbox span.checkmark {
+    position: relative;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    border: 1px solid var(--color-border)
+}
+
+/* Khi checkbox được chọn, thay đổi màu sắc và thêm biểu tượng check */
+.CheckOut .box_checkout .bill .proceed-to-checkout .selectPayment .checkout__input__checkbox input[type="checkbox"]:checked + span.checkmark {
+    background-color: var(--color-primary);
+}
+
+.CheckOut .box_checkout .bill .proceed-to-checkout .selectPayment .checkout__input__checkbox span.checkmark::after {
+    content: "";
+    position: absolute;
+    display: none;
+    left: 8px;
+    top: 4px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    transform: rotate(45deg);
+}
+
+.CheckOut .box_checkout .bill .proceed-to-checkout .selectPayment .checkout__input__checkbox input[type="checkbox"]:checked + span.checkmark::after {
+    display: block;
+}
+
+.CheckOut .box_checkout .bill .proceed-to-checkout .btn-proceed .shop-now {
+    margin: 0;
+    text-transform: uppercase;
+    width: 100%;
+    font-weight: 600;
+    font-size: 13px;
+}
+
+.CheckOut .box_checkout .bill .proceed-to-checkout .btn-proceed .shop-now:hover {
+    box-shadow: inset 470px 0 0 0 var(--color-primary);
+}

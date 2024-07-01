@@ -1,0 +1,168 @@
+.ListProduct .box_product {
+    margin-top: 10%;
+    margin-bottom: 10%;
+}
+
+.ListProduct .box_product .container .row .col-lg-3 .FBN,
+.ListProduct .box_product .container .row .col-lg-3 .FBN .filterbyname {
+    font-size: 20px;
+    font-family: var(--font-secondary);
+    font-weight: 400;
+    line-height: 1.35;
+    text-transform: capitalize;
+    margin-bottom: 30px;
+    padding-bottom: 10px;
+}
+
+.ListProduct .box_product .container .row .col-lg-3 .FBN {
+    border-bottom: 1px solid rgba(128, 128, 128, 0.5);
+    padding-bottom: 30px;
+}
+
+.ListProduct .box_product .container .row .col-lg-3 .FBN input {
+    border: none;
+    background-color: transparent;
+    outline: none;
+    width: 80%;
+}
+
+
+.ListProduct .box_product .container .row .col-lg-3 .Product_Categories {
+    font-size: 20px;
+    font-family: var(--font-secondary);
+    font-weight: 400;
+    line-height: 1.35;
+    text-transform: capitalize;
+    margin-bottom: 30px;
+    padding-bottom: 10px;
+}
+
+.ListProduct .box_product .container .row .col-lg-3 .Categories {
+    border-bottom: 1px solid rgba(128, 128, 128, 0.5);
+    padding-bottom: 30px;
+}
+
+.ListProduct .box_product .container .row .col-lg-3 .Categories .diamonds {
+    display: flex;
+    width: 35%;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.ListProduct .box_product .container .row .col-lg-3 .Categories .diamonds .name{
+    font-size: 18px;
+    font-weight: 400;
+    font-style: normal;
+    text-rendering: optimizeLegibility;
+    color: var(--color-text);
+    line-height: 1.5;
+    letter-spacing: 0;
+    transition: 0.2s ease;
+}
+
+.ListProduct .box_product .container .row .col-lg-3 .Categories .diamonds .name:hover {
+    color: var(--color-primary)
+}
+
+.ListProduct .box_product .container .row .col-lg-3 .FBP .TO {
+    margin-top: 4%;
+    margin-left: 5px;
+}
+
+.ListProduct .box_product .container .row .col-lg-3 .FBP .filterbyprice {
+    font-size: 20px;
+    font-family: var(--font-secondary);
+    font-weight: 400;
+    line-height: 1.35;
+    text-transform: capitalize;
+    margin-bottom: 30px;
+    margin-top: 30px;
+    padding-bottom: 10px;
+}
+
+.ListProduct .box_product .container .row .col-lg-3 .FBP input {
+    width: 50%;
+    padding: 5px;
+    font-size: 14px;
+    margin: 5px;
+    font-weight: 600;
+    text-transform: none;
+    border: none;
+    border-bottom: 1px solid black;
+    outline: none;
+    background-color: transparent;
+}
+
+.ListProduct .box_product .container .row .col-lg-3 .FBP input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+.ListProduct .box_product .container .row .col-lg-9 .row .container {
+    padding: 0;
+}
+
+.ListProduct .box_product .container .row .col-lg-9 .row .container .sorting {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--color-border);
+    margin-bottom: 2%;
+}
+
+.ListProduct .box_product .container .row .col-lg-9 .row .container .sorting .Count_AP {
+    display: flex;
+    margin-bottom: 20px;
+    padding: 10px;
+}
+
+.ListProduct .box_product .container .row .col-lg-9 .row .container .sorting .sort {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    width: -moz-fit-content;
+    width: fit-content;
+    margin-bottom: 20px;
+    padding: 10px;
+    position: relative;
+    cursor: pointer;
+}
+
+
+.ListProduct .box_product .container .row .col-lg-9 .row .container .sorting .sort .fa-angle-down {
+    transform: rotate(180deg);
+    transition: 0.3s ease;
+}
+
+.ListProduct .box_product .container .row .col-lg-9 .row .container .sorting .sort .fa-angle-down.active {
+    transform: rotate(360deg);
+}
+
+.ListProduct .box_product .container .row .col-lg-9 .row .container .sorting .sort .sorts {
+    background-color: whitesmoke;
+    border-radius: 5px;
+    padding: 10px 10px;
+    width: 150%;
+    opacity: 0;
+    visibility: hidden;
+    top: 40px;
+    right: 0;
+    position: absolute;
+    z-index: 100;
+    transition: 0.3s ease-out;
+}
+
+.ListProduct .box_product .container .row .col-lg-9 .row .container .sorting .sort p {
+    margin: 0;
+}
+
+.ListProduct .box_product .container .row .col-lg-9 .row .container .sorting .sort .sorts.active {
+    visibility: visible;
+    top: 50px;
+    opacity: 1;
+    box-shadow: 0 0 10px var(--color-border);
+}
+
+.ListProduct .box_product .container .row .col-lg-9 .row .Cart_list {
+    margin-bottom: 20px;
+}

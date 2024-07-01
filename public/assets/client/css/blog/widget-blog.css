@@ -1,0 +1,103 @@
+.widget-area {
+    margin-left: 10%;
+}
+
+
+.widget-area .widget_title {
+    font-size: 20px;
+    font-size: 1.25rem;
+    color: var(--color-secondary);
+    font-family: var(--font-secondary);
+    font-weight: 400;
+    font-style: normal;
+    text-decoration: none;
+    line-height: 1.35;
+    letter-spacing: 0;
+    transition: background .3s, border .3s, border-radius .3s, box-shadow .3s;
+    text-transform: capitalize;
+    margin-bottom: 30px;
+}
+
+.widget-area .widget {
+    margin-bottom: 40px;
+    padding-bottom: 35px;
+    font-size: 16px;
+    font-size: 1rem;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.widget-area .widget_search .widget_content .search-form {
+    display: flex;
+    align-items: center;
+    padding: 1.25em 1.85em;
+    background-color: var(--color-background-field);
+}
+
+.widget-area .widget_search .widget_content .search-form .search-field {
+    padding: 0 1.85em 0 0;
+    background-color: transparent;
+    border: none;
+    box-sizing: border-box;
+    font-weight: 400;
+    font-size: 16px;
+    transition: all ease-in-out .3s;
+    width: 100%;
+}
+
+.widget-area .widget_search .widget_content .search-form .search-submit {
+    background-color: transparent;
+    border: none;
+}
+
+.widget-area .widget_categories .widget-content ul li {
+    margin-bottom: .875em;
+}
+
+.widget-area .widget_categories .widget-content ul li a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
+    color: var(--color-secondary);
+    transition: 0.3s linear;
+
+}
+
+.widget-area .widget_categories .widget-content ul li a:hover {
+    color: var(--color-primary);
+}
+
+.widget-area .widget_recent_entries .widget-content ul li {
+    margin-bottom: 29px;
+}
+
+.widget-area .widget_recent_entries .widget-content ul li a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.widget-area .widget_recent_entries .widget-content ul li a .recent-entry-info {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.widget-area .widget_recent_entries .widget-content ul li a .recent-entry-info .recent-entry-date {
+    text-transform: capitalize;
+    line-height: 22px;
+    font-size: 14px;
+    font-size: .875rem;
+    color: var(--color-lighter);
+    margin-bottom: 8px;
+}
+
+.widget-area .widget_recent_entries .widget-content ul li a .recent-entry-info .recent-entry-title {
+    line-height: 24px;
+    font-size: 16px;
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--color-secondary);
+    font-family: var(--font-secondary);
+}

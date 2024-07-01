@@ -1,0 +1,9 @@
+.tag-sort .item-sort {
+    color: var(--color-text);
+    transition: 0.2s linear;
+    background-color: transparent;
+}
+
+.tag-sort .item-sort:hover {
+    color: var(--color-primary);
+}

@@ -1,0 +1,124 @@
+svg {
+    margin-top: 0px;
+}
+
+path {
+    fill: black;
+    stroke: black;
+    stroke-width: 10px;
+    transition: 0.2s ease-in-out;
+}
+
+.container-fluid {
+    --bs-gutter-x: 0;
+}
+
+.HeaderMain {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1% 20px;
+    background-color: white;
+}
+
+.HeaderMain .left {
+    display: flex;
+    gap: 20px;
+    width: 40%;
+}
+
+.HeaderMain .left .menu-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-transform: uppercase;
+    line-height: 1.2857142857;
+    font-weight: 600;
+    font-size: 16px;
+    color: var(--color-secondary);
+    letter-spacing: 1px;
+    transition: 0.2s ease;
+
+}
+
+.HeaderMain .left .menu-title:hover {
+    color: var(--color-primary);
+}
+
+
+.HeaderMain .left .menu-title i {
+    margin-left: 10px;
+}
+
+.HeaderMain .mid {
+    display: flex;
+    justify-content: center;
+    width: 20%;
+}
+
+.HeaderMain .mid .thumb {
+    width: 30%;
+
+}
+
+.HeaderMain .right {
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    width: 40%;
+}
+
+.HeaderMain .right .register {
+    color: var(--color-secondary);
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 16px;
+    transition: 0.2s linear;
+    cursor: pointer;
+}
+
+.HeaderMain .right .register:hover {
+    color: var(--color-primary)
+}
+
+.HeaderMain .right .search {
+    transition: 0.2s ease;
+    cursor: pointer;
+}
+
+.HeaderMain .right .search i {
+    font-size: 25px;
+    margin-left: 15px;
+}
+
+.HeaderMain .right .search:hover {
+    color: var(--color-primary)
+}
+
+.HeaderMain .right .cart {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 15px;
+    cursor: pointer;
+}
+
+
+.HeaderMain .right .cart:hover svg path {
+    fill: var(--color-primary);
+    stroke: var(--color-primary);
+    stroke-width: 2px;
+}
+
+.HeaderMain .right .cart:hover .count {
+    color: var(--color-primary);
+    font-weight: 300;
+}
+
+.HeaderMain .right .cart .count {
+    font-weight: 600;
+    font-size: 15px;
+    margin-bottom: 20px;
+    transition: 0.2s linear;
+    color: var(--color-secondary)
+}

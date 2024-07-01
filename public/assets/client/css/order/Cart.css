@@ -1,0 +1,128 @@
+.Cart .cart-product {
+    display: none;
+    margin: 2% 0;
+    text-align: center;
+}
+
+.Cart .cart-product.active {
+    display: block;
+}
+
+.Cart .noti{
+    display: none;
+}
+
+.Cart .noti.active {
+    display: block;
+}
+
+.Cart .cart-product .title {
+    color: var(--color-secondary);
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.Cart .cart-product .delete-product {
+    cursor: pointer;
+    transition: 0.2s linear;
+}
+
+.Cart .cart-product .delete-product:hover {
+    color: var(--color-primary);
+}
+
+.Cart .cart-product .delete-product:active {
+    color: rgb(197, 0, 0);
+}
+
+.Cart .cart-product .quantity {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid #e3e3e3;
+    width: 100%;
+    margin: 0 auto;
+
+}
+
+.Cart .cart-product .quantity .input-number {
+    background-color: initial;
+    border: none;
+    font-size: 14px;
+    font-weight: 600;
+    margin: 0 auto;
+    outline: none;
+    padding: 13px 0 13px 0;
+    text-align: center;
+    width: 100%;
+}
+
+.Cart .cart-product .quantity button {
+    padding: 5px 10px 5px 10px;
+    border: none;
+    background-color: transparent;
+    transition: 0.5s linear;
+    border-radius: 50%;
+    outline: none;
+}
+
+.Cart .cart-product .quantity button:active {
+    background-color: rgba(128, 128, 128, 0.5)
+}
+
+p {
+    margin: 0;
+}
+
+.Cart .cart-product .bill {
+    text-align: left;
+    padding: 30px 30px 40px;
+    position: relative;
+    background-color: #F8F6F4;
+    border: 6px solid #E3E3E3;
+    border-radius: 5px;
+    color: var(--color-secondary)
+}
+
+.Cart .cart-product .bill .cart-total h2 {
+    font-size: 28px;
+    font-family: 'Prata', sans-serif;
+    margin-bottom: 15px;
+    font-weight: 400;
+}
+
+.Cart .cart-product .bill .total-product,
+.Cart .cart-product .bill .total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 18px;
+    padding: 1em 0;
+}
+
+.Cart .cart-product .bill .total {
+    margin: 10% 0
+}
+
+.Cart .cart-product .bill .total .price {
+    font-size: 24px;
+    color: var(--color-primary);
+    font-weight: 600;
+}
+
+.Cart .cart-product .bill .proceed-to-checkout {
+    outline: none;
+    text-align: center;
+}
+
+.Cart .cart-product .bill .proceed-to-checkout .btn-proceed .shop-now {
+    margin: 0;
+    text-transform: uppercase;
+    width: 100%;
+    font-weight: 600;
+    font-size: 13px;
+}
+
+.Cart .cart-product .bill .proceed-to-checkout .btn-proceed .shop-now:hover {
+    box-shadow: inset 350px 0 0 0 var(--color-primary);
+}

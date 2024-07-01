@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&family=Prata&display=swap');
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
+}
+
+img {
+    width: 100%;
+}
+
+a {
+    text-decoration: none;
+    color: var(--color-secondary);
+}
+
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Jost", sans-serif;
+    --font-secondary: "Prata";
+    --color-primary: #daa14c;
+    --color-secondary: #30373e;
+    --color-text: #666;
+    --color-accent: #30373e;
+    --color-lighter: #888;
+    --color-dark: #202020;
+    --color-highlight: #ccc;
+    --color-border: #e3e3e3;
+    --color-background-light: #f8f6f4;
+    --color-background-field: #DADADA20;
+    --bs-gutter-x: 1.5rem;
+    background-color: #f8f6f4;
+}
+
+/* .container {
+    max-width: 100%;
+    padding: 0 5%;
+} */
+
+/* Chrome, Safari, Edge, Opera */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+    -moz-appearance: textfield;
+    appearance:textfield ;
+}
+
+
+/* .colored-toast.swal2-icon-success {
+  background-color: #a5dc86 !important;
+} */
+
+.colored-toast.swal2-icon-success {
+  border:2px solid var(--color-primary) !important;
+}
+
+.colored-toast.swal2-icon-error {
+  background-color: #f27474 !important;
+}
+
+.colored-toast.swal2-icon-warning {
+  background-color: #f8bb86 !important;
+}
+
+.colored-toast.swal2-icon-info {
+  background-color: #3fc3ee !important;
+}
+
+.colored-toast.swal2-icon-question {
+  background-color: #87adbd !important;
+}
+
+.colored-toast .swal2-title {
+  color: black;
+}
+
+.colored-toast .swal2-close {
+  color: black
+}
+
+.colored-toast .swal2-html-container {
+  color: black
+}
+
+
+.swal2-timer-progress-bar{
+    background-color: #f8bb86
+}
