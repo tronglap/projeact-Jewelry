@@ -16,7 +16,6 @@ class OrderController extends Controller
      */
     public function index(Request $request)
     {
-        $datas = Order::all();
         $orderPayment = OrderPayment::all();
         $nameUser = User::all();
 
@@ -26,7 +25,9 @@ class OrderController extends Controller
         $query = Order::query();
 
         if ($key) {
-            $query->where('name', 'like', "%$key%");
+            $query->whereHas('user', function ($q) use ($key) {
+                $q->where('name', 'like', "%$key%");
+            });
         }
 
         $query->orderBy('created_at', $sortBy === 'latest' ? 'desc' : 'asc');
@@ -40,39 +41,12 @@ class OrderController extends Controller
         return view('admin.pages.order.index', ['datas' => $datas, 'orderPayment' => $orderPayment, 'nameUser' => $nameUser]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function detail($id)
     {
         $data = Order::find($id);
 
         if (!$data) {
-            return redirect()->route('admin.order.index')->with('message', 'Order not found');
+            return redirect()->route('admin.order.index')->with('message', 'Không tìm thấy đơn hàng!');
         }
 
         $orderPayment = OrderPayment::where('order_id', $id)->first();
@@ -91,23 +65,15 @@ class OrderController extends Controller
         $order = Order::find($id);
 
         if (!$order) {
-            return redirect()->route('admin.order.index')->with('message', 'Order not found');
+            return redirect()->route('admin.order.index')->with('message', 'Không tìm thấy đơn hàng!');
         }
 
         $status = $request->input('status');
 
         if ($order->updateStatus($status)) {
-            return redirect()->route('admin.order.index', $id)->with('message', 'Order status updated successfully');
+            return redirect()->route('admin.order.index', $id)->with('message', 'Trạng thái đơn hàng đã được cập nhật thành công!');
         }
 
-        return redirect()->route('admin.order.index', $id)->with('message', 'Invalid status');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return redirect()->route('admin.order.index', $id)->with('message', 'Trạng thái không hợp lệ!');
     }
 }

@@ -6,7 +6,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\Order\OrderController;
 use App\Http\Controllers\Admin\Product\ProductController;
 use App\Http\Controllers\Admin\ProductCategory\ProductCategoryController;
-
+use App\Http\Controllers\Admin\User\UserController;
 use Illuminate\Support\Facades\Route;
 
 //Product Category
@@ -81,3 +81,15 @@ Route::prefix('admin/order')
 //Admin
 // Admin Dashboard
 Route::get('admin', [DashboardController::class, 'index'])->name('admin.index')->middleware('check.user.admin');
+
+//User
+Route::prefix('admin/user')
+    ->name('admin.user.')
+    ->middleware('check.user.admin')
+    ->group(function () {
+        Route::get('/', [UserController::class, 'index'])->name('index');
+        Route::get('/detail/{user}', [UserController::class, 'detail'])->name('detail');
+        Route::put('/{user}', [UserController::class, 'update'])->name('update')->middleware('check.role.admin.staff');
+        Route::get('/create', [UserController::class, 'create'])->name('create')->middleware('check.role.admin.staff');
+        Route::post('/store', [UserController::class, 'store'])->name('store')->middleware('check.role.admin.staff');
+    });

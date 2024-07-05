@@ -42,7 +42,6 @@ class BlogController extends Controller
 
     private function countBlogsByCategory()
     {
-        // Đếm số lượng bài viết theo từng danh mục có status là 'show'
         return Blog::where('status', '!=', 'hide')
             ->select('blog_category_id', DB::raw('count(*) as total'))
             ->groupBy('blog_category_id')
@@ -51,10 +50,12 @@ class BlogController extends Controller
 
     public function recentPosts()
     {
-        $recentPosts = Blog::recentPosts();
+        $recentPosts = Blog::where('status', '!=', 'hide')
+            ->recentPosts();
 
         return view('client.pages.blog.list', ['recentPosts' => $recentPosts]);
     }
+
 
     public function detail($id)
     {
@@ -67,7 +68,7 @@ class BlogController extends Controller
 
         $recentPosts = Blog::recentPosts();
 
-        if (!$data) {
+        if (!$data || $data->status === 'hide') {
             return redirect()->route('home.blog.index')->with('message', 'Blog is not found');
         }
         return view('client.pages.blog.detail', [

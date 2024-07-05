@@ -13,7 +13,7 @@ use Illuminate\Queue\SerializesModels;
 class OrderEmailAdmin extends Mailable
 {
     use Queueable, SerializesModels;
-public Order $order;
+    public Order $order;
     /**
      * Create a new message instance.
      */
@@ -28,7 +28,7 @@ public Order $order;
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Order Email Admin',
+            subject: 'Có 1 đơn hàng vừa đặt',
         );
     }
 

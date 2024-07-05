@@ -20,7 +20,7 @@ class SendMailToAdmin
      */
     public function handle(object $event): void
     {
-         $order = $event->order;
+        $order = $event->order;
 
         Mail::to('tronglap0@gmail.com')->send(new OrderEmailAdmin($order));
     }

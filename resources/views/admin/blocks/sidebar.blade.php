@@ -131,9 +131,14 @@
 
     <!-- Nav Item - List customer -->
     <li class="nav-item">
-        <a class="nav-link" href="/admin">
+        <a class="nav-link" href="{{ route('admin.user.index') }}">
             <i class="fa-solid fa-user-group"></i>
             <span>List</span></a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('admin.user.create') }}">
+            <i class="fa-solid fa-user-plus"></i> <span>Create</span></a>
     </li>
 
     <!-- Divider -->

@@ -8,6 +8,7 @@ return [
     'category_blog_per_page' => env('BLOG_CATEGORY_PER_PAGE', 5),
     'blog_per_page' => env('BLOG_PER_PAGE', 10),
     'order_per_page' => env('ORDER_PER_PAGE', 20),
+    'user_per_page' => env('USER_PER_PAGE', 20),
 
     'vnpay' => [
         'TmnCode' => env('VNPAY_TMN_CODE', '2RW8W06C'),

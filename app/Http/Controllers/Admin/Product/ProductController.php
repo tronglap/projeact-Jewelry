@@ -95,35 +95,16 @@ class ProductController extends Controller
         $product->image_url_second = $fileName;
         $product->save(); // insert
 
-        $message = $product ? 'Add product successfully' : 'Add product failed';
+        $message = $product ? 'Thêm sản phẩm thành công!' : 'Thêm sản phẩm thất bại!';
         return redirect()->route('admin.product.create')->with('message', $message);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(ProductUpdateRequest $request, int $id)
     {
         $product = Product::find($id);
 
         if (!$product) {
-            return redirect()->route('admin.product.index')->with('message', 'Product not found');
+            return redirect()->route('admin.product.index')->with('message', 'Không tìm thấy sản phẩm!');
         }
 
         $product->update([
@@ -167,7 +148,7 @@ class ProductController extends Controller
 
         $product->save();
 
-        $message = $product ? 'Update product successfully' : 'Update product failed';
+        $message = $product ? 'Cập nhật thông tim sản phẩm thành công!' : 'Cập nhật thông tim sản phẩm thất bại!';
         return redirect()->route('admin.product.index')->with('message', $message);
     }
 
@@ -177,7 +158,7 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         $result = $product->delete();
-        $message = $result ? 'Delete product successfully' : 'Delete product failed';
+        $message = $result ? 'Xóa sản phẩm thành công!' : 'Xóa sản phẩm thất bại!';
         return redirect()->route('admin.product.index')->with('message', $message);
     }
     public function detail(Product $product)

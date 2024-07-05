@@ -19,7 +19,8 @@ class Blog extends Model
 
     public static function recentPosts()
     {
-        return self::orderBy('created_at', 'desc')
+        return self::where('status', '!=', 'hide')
+            ->orderBy('created_at', 'desc')
             ->orderBy('updated_at', 'desc')
             ->take(4)
             ->get();

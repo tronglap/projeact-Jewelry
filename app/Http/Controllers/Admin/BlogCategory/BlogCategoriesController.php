@@ -55,7 +55,7 @@ class BlogCategoriesController extends Controller
         $checkNameIsExists = DB::table('blog_categories')->where('name', $request->name)->exists();
 
         if ($checkNameIsExists) {
-            return redirect()->route('admin.blogCategories.create')->with('message', 'Name is exists!');
+            return redirect()->route('admin.blogCategories.create')->with('message', 'Danh mục đã tồn tại!');
         } else {
             //fresh data
             $result = DB::table('blog_categories')->insert([
@@ -64,7 +64,7 @@ class BlogCategoriesController extends Controller
                 'status' => $request->status
             ]);
 
-            $message = $result ? 'Create Blog Category Success!' : 'Create Blog Category fail!';
+            $message = $result ? 'Tạo danh mục thành công!' : 'Tạo danh mục thất bại!';
             return redirect()->route('admin.blogCategories.create')->with('message', $message);
         }
     }
@@ -78,7 +78,7 @@ class BlogCategoriesController extends Controller
 
         // Kiểm tra xem dữ liệu có được tìm thấy không
         if (!$data) {
-            return redirect()->route('admin.blogCategories.index')->with('message', 'Blog category not found');
+            return redirect()->route('admin.blogCategories.index')->with('message', 'Không tìm thấy danh mục!');
         }
 
         return view('admin.pages.blogCategory.detail', compact('data'));
@@ -107,7 +107,7 @@ class BlogCategoriesController extends Controller
                 ->first();
 
             if ($existingCategory) {
-                $message = 'Tên đã tồn tại, vui lòng chọn tên khác';
+                $message = 'Tên đã tồn tại, vui lòng chọn tên khác!';
                 return redirect()->route('admin.blogCategories.index')->with('message', $message);
             }
         }
@@ -118,7 +118,7 @@ class BlogCategoriesController extends Controller
             'status' => $request->status
         ]);
 
-        $message = $result ? 'Cập nhật danh mục blog thành công' : 'Cập nhật danh mục blog thất bại';
+        $message = $result ? 'Cập nhật danh mục thành công!' : 'Cập nhật danh mục thất bại!';
         return redirect()->route('admin.blogCategories.index')->with('message', $message);
     }
 
@@ -129,14 +129,14 @@ class BlogCategoriesController extends Controller
     public function destroy(BlogCategories $blogCategory)
     {
         $result = $blogCategory->delete();
-        $message = $result ? 'Delete blog category successfully' : 'Delete blog category failed';
+        $message = $result ? 'Xóa danh mục thành công!' : 'Xóa danh mục thất bại!';
         return redirect()->route('admin.blogCategories.index')->with('message', $message);
     }
 
     public function restore(int $id)
     {
         $data = BlogCategories::withTrashed()->find($id)->restore();
-        $message = $data ? 'Restore blog category successfully' : 'Restore blog category failed';
+        $message = $data ? 'Phục hồi danh mục thành công!' : 'Phục hồi danh mục thất bại!';
         return redirect()->route('admin.blogCategories.index')->with('message', $message);
     }
 
@@ -145,9 +145,9 @@ class BlogCategoriesController extends Controller
         $blogCategory = BlogCategories::withTrashed()->find($id);
         if ($blogCategory) {
             $blogCategory->forceDelete();
-            $message = 'Blog category permanently deleted';
+            $message = 'Danh mục đã bị xóa vĩnh viễn!';
         } else {
-            $message = 'Blog category not found or already deleted permanently';
+            $message = 'Không tìm thấy danh mục hoặc danh mục đã bị xóa vĩnh viễn!';
         }
         return redirect()->route('admin.blogCategories.index')->with('message', $message);
     }

@@ -23,7 +23,7 @@ class BlogController extends Controller
         $query = Blog::query();
 
         if ($key) {
-            $query->where('name', 'like', "%$key%")
+            $query->where('title', 'like', "%$key%")
                 ->orWhere('slug', 'like', "%$key%");
         }
 
@@ -75,7 +75,7 @@ class BlogController extends Controller
 
         $blog->save(); // insert
 
-        $message = $blog ? 'Blog is posted success!' : 'Some thing went wrong, please try again!';
+        $message = $blog ? 'Đăng bài thành công!' : 'Có lỗi xảy ra, vui lòng thử lại!';
         return redirect()->route('admin.blog.create')->with('message', $message);
     }
 
@@ -87,7 +87,7 @@ class BlogController extends Controller
         $blog = blog::find($id);
 
         if (!$blog) {
-            return redirect()->route('admin.blog.index')->with('message', 'Blog not found');
+            return redirect()->route('admin.blog.index')->with('message', 'Không tìm thấy bài viết!');
         }
 
         $blog->update([
@@ -114,7 +114,7 @@ class BlogController extends Controller
 
         $blog->save(); // insert
 
-        $message = $blog ? 'Blog is updated success!' : 'some thing went wrong, please try again!';
+        $message = $blog ? 'Cập nhật bài viết thành công!' : 'Có lỗi xảy ra, vui lòng thử lại!';
         return redirect()->route('admin.blog.index')->with('message', $message);
     }
 
@@ -136,7 +136,7 @@ class BlogController extends Controller
         $data = Blog::find($id);
 
         if (!$data) {
-            return redirect()->route('admin.blog.index')->with('message', 'Blog not found');
+            return redirect()->route('admin.blog.index')->with('message', 'Không tìm thấy bài viết!');
         }
 
         $blogCategories = BlogCategories::all();
@@ -149,7 +149,7 @@ class BlogController extends Controller
     public function destroy(Blog $blog)
     {
         $result = $blog->delete();
-        $message = $result ? 'Xóa bài viết thành công' : 'Đã xảy ra lỗi trong lúc thực thi. Vui lòng thử lại!';
+        $message = $result ? 'Xóa bài viết thành công!' : 'Có lỗi xảy ra, vui lòng thử lại!';
         return redirect()->route('admin.blog.index')->with('message', $message);
     }
 }

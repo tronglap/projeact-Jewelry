@@ -28,7 +28,7 @@ class OrderEmailCustomer extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Order Email Customer',
+            subject: 'Thư xác nhận đặt hàng thành công',
         );
     }
 

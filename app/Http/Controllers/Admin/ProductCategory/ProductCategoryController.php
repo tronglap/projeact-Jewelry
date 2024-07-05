@@ -22,7 +22,7 @@ class ProductCategoryController extends Controller
         $checkNameIsExists = DB::table('product_category')->where('name', $request->name)->exists();
 
         if ($checkNameIsExists) {
-            return redirect()->route('admin.product_category.create')->with('message', 'Name is exists!');
+            return redirect()->route('admin.product_category.create')->with('message', 'Tên danh mục đã tồn tại!');
         } else {
             $result = DB::table('product_category')->insert([
                 'name' => $request->name,
@@ -31,9 +31,9 @@ class ProductCategoryController extends Controller
             ]);
 
             if ($result) {
-                return redirect()->route('admin.product_category.create')->with('message', 'Create Category Success!');
+                return redirect()->route('admin.product_category.create')->with('message', 'Tạo danh mục thành công!');
             } else {
-                return redirect()->route('admin.product_category.create')->with('message', 'Create Category fail!');
+                return redirect()->route('admin.product_category.create')->with('message', 'Tạo danh mục thất bại!');
             }
         }
     }
@@ -74,14 +74,14 @@ class ProductCategoryController extends Controller
     public function destroy(ProductCategory $productCategory)
     {
         $result = $productCategory->delete();
-        $message = $result ? 'Delete product category successfully' : 'Delete product category failed';
+        $message = $result ? 'Xóa danh mục thành công!' : 'Xóa danh mục thất bại!';
         return redirect()->route('admin.product_category.index')->with('message', $message);
     }
 
     public function restore(Request $request, int $id)
     {
         $data = ProductCategory::withTrashed()->find($id)->restore();
-        $message = $data ? 'Restore product category successfully' : 'Restore product category failed';
+        $message = $data ? 'Phục hồi danh mục thành công!' : 'Phục hồi danh mục thất bại!';
         return redirect()->route('admin.product_category.index')->with('message', $message);
     }
 
@@ -98,7 +98,7 @@ class ProductCategoryController extends Controller
             'status' => $request->status
         ]);
 
-        $message = $result ? 'Update product category successfully' : 'Update product category failed';
+        $message = $result ? 'Cập nhật danh muc thành công!' : 'Cập nhật danh muc thất bại!';
         return redirect()->route('admin.product_category.index')->with('message', $message);
     }
     public function forceDelete(int $id)
@@ -106,9 +106,9 @@ class ProductCategoryController extends Controller
         $productCategory = ProductCategory::withTrashed()->find($id);
         if ($productCategory) {
             $productCategory->forceDelete();
-            $message = 'Product category permanently deleted';
+            $message = 'Danh mục đã bị xóa vĩnh viễn!';
         } else {
-            $message = 'Product category not found or already deleted permanently';
+            $message = 'Không tìm thấy danh mục hoặc danh mục đã bị xóa vĩnh viễn!';
         }
         return redirect()->route('admin.product_category.index')->with('message', $message);
     }

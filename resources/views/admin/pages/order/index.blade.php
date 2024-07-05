@@ -11,12 +11,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="h3 mb-0 text-gray-800">Product Category</h1>
+                        <h1 class="h3 mb-0 text-gray-800">List Order</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Product Category</li>
+                            <li class="breadcrumb-item active">List Order</li>
                         </ol>
                     </div>
                 </div>
@@ -39,14 +39,13 @@
                                 </div>
                             @endif
                             <div class="card-header">
-                                <h3 class="card-title">List product category</h3>
-                                <form id="searchForm" role="form" action="{{ route('admin.product_category.index') }}"
+                                <h3 class="card-title">List Order</h3>
+                                <form id="searchForm" role="form" action="{{ route('admin.order.index') }}"
                                     method="GET">
                                     <div class="form-group">
-                                        <label for="key">Search category</label>
+                                        <label for="key">Search Order</label>
                                         <input type="text" value="{{ request()->key ?? '' }}" id="searchKey"
-                                            name="key" class="form-control" placeholder="Enter name">
-
+                                            name="key" class="form-control" placeholder="Enter order">
                                         <label for="sortBy">Sort by create at</label>
                                         <select name="sortBy" id="sortBy" class="form-control">
                                             <option value="">--Please Select--</option>

@@ -1,4 +1,4 @@
-<table id="tableorder" class="table table-bordered">
+<table id="tableOrder" class="table table-bordered">
     <thead>
         <tr>
             <th style="width: 10px">Number</th>
