@@ -1,0 +1,52 @@
+.page-error{
+    margin: 15% 20px;
+    text-align: center;
+}
+
+.page-error .container .error-404{
+    width: 70%;
+    margin: 0 auto;
+}
+
+.page-error .container .error-404 .btn-back .shop-now:hover {
+    box-shadow: inset 300px 0 0 0 var(--color-primary);
+}
+
+.page-error .container .error-404 .image-404 .thumb{
+    width: 80%;
+    margin: 0 auto;
+}
+
+.page-error .container .error-404 .content{
+    position: relative;
+}
+
+.page-error .container .error-404 .content .thumb{
+    width: 40%;
+    margin: 0 auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translate(67%, 0);
+}
+
+.page-error .container .error-404 .content .error-subtitle{
+    font-family: var(--font-secondary);
+    font-size: 50px;
+    font-size: 3.125rem;
+    font-weight: 400;
+    margin-bottom:12px;
+    padding-top: 15%;
+}
+
+.page-error .container .error-404 .content .error-text{
+    font-size: 18px;
+    font-size: 1.125rem;
+    line-height: 26px;
+    font-weight: 400;
+    margin: 0 auto 58px;
+    text-align: center;
+    max-width: 400px;
+}
+
+

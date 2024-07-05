@@ -35,7 +35,7 @@ class AuthenticatedSessionController extends Controller
         $user = Auth::user();
 
         // Điều hướng dựa trên vai trò của người dùng
-        if ($user->role === 1) {
+        if ($user->role === 1 || $user->role === 2) {
             return redirect()->intended(RouteServiceProvider::ADMIN);
         } else {
             return redirect()->intended(RouteServiceProvider::HOME);

@@ -149,7 +149,6 @@ class ProductController extends Controller
 
             $file->move(public_path('assets/images/'), $fileName);
 
-            // Cập nhật đường dẫn hình ảnh vào đối tượng product
             $product->image_url = $fileName;
         }
 
@@ -163,11 +162,10 @@ class ProductController extends Controller
 
             $file->move(public_path('assets/images_second/'), $fileName);
 
-            // Cập nhật đường dẫn hình ảnh thứ hai vào đối tượng product
             $product->image_url_second = $fileName;
         }
 
-        $product->save(); // Lưu lại các thay đổi vào cơ sở dữ liệu
+        $product->save();
 
         $message = $product ? 'Update product successfully' : 'Update product failed';
         return redirect()->route('admin.product.index')->with('message', $message);

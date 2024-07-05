@@ -18,11 +18,11 @@
             <tr style="text-align: center">
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ $data->name }}</td>
-                <td>{{ $data->price }}</td>
+                <td>$ {{ number_format($data->price, 2, '.', ',') }}</td>
                 <td>
-                    {{ $data->promotion }}
+                    {{ $data->promotion ? '$' . number_format($data->promotion, 2, '.', ',') : 'None' }}
                     @if ($data->promotion > 0)
-                        Sale:{{ number_format((($data->price - $data->promotion) / $data->price) * 100, 2) }}%
+                        Sale:{{ number_format((($data->price - $data->promotion) / $data->price) * 100, 2, '.', ',') }}%
                     @else
                     @endif
                 </td>

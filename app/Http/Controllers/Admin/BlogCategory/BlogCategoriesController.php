@@ -99,24 +99,19 @@ class BlogCategoriesController extends Controller
      */
     public function update(BlogCategoriesUpdateRequest $request, int $id)
     {
-        // Lấy ra bản ghi cần cập nhật
         $blogCategory = BlogCategories::find($id);
 
-        // Kiểm tra nếu tên mới khác tên hiện tại của bản ghi
         if ($request->name !== $blogCategory->name) {
-            // Kiểm tra xem tên mới đã tồn tại trong các bản ghi khác không
             $existingCategory = BlogCategories::where('name', $request->name)
                 ->where('id', '!=', $id)
                 ->first();
 
-            // Nếu tên đã tồn tại thì trả về thông báo lỗi
             if ($existingCategory) {
                 $message = 'Tên đã tồn tại, vui lòng chọn tên khác';
                 return redirect()->route('admin.blogCategories.index')->with('message', $message);
             }
         }
 
-        // Cập nhật thông tin nếu không có lỗi
         $result = $blogCategory->update([
             'name' => $request->name,
             'slug' => $request->slug,

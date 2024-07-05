@@ -12,23 +12,19 @@ class BlogController extends Controller
 {
     public function index(Request $request)
     {
-        $itemPerPage = config('myconfig.blog_per_page', 10); // Số bài viết mỗi trang
-        $currentPage = $request->input('page', 1); // Trang hiện tại, mặc định là 1
+        $itemPerPage = config('myconfig.blog_per_page', 10);
+        $currentPage = $request->input('page', 1);
         $offset = ($currentPage - 1) * $itemPerPage;
 
-        // Lấy danh sách bài viết có status là 'show' theo trang
         $datas = Blog::where('status', '!=', 'hide')
             ->offset($offset)
             ->limit($itemPerPage)
             ->get();
 
-        // Lấy tổng số bài viết có status là 'show'
         $totalBlogs = Blog::where('status', '!=', 'hide')->count();
 
-        // Lấy danh sách các danh mục blog
         $blogCategories = BlogCategories::all();
 
-        // Đếm số lượng bài viết theo từng danh mục có status là 'show'
         $categoryBlogCounts = $this->countBlogsByCategory();
 
         $recentPosts = Blog::recentPosts();
@@ -55,7 +51,6 @@ class BlogController extends Controller
 
     public function recentPosts()
     {
-        // Gọi phương thức recentPosts() từ model Blog để lấy 4 bài viết mới nhất
         $recentPosts = Blog::recentPosts();
 
         return view('client.pages.blog.list', ['recentPosts' => $recentPosts]);
@@ -66,10 +61,8 @@ class BlogController extends Controller
         $data = Blog::find($id);
         $blogCategory = BlogCategories::all();
 
-        // Lấy danh sách các danh mục blog
         $blogCategories = BlogCategories::all();
 
-        // Đếm số lượng bài viết theo từng danh mục có status là 'show'
         $categoryBlogCounts = $this->countBlogsByCategory();
 
         $recentPosts = Blog::recentPosts();

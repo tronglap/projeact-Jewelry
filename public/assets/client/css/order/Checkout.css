@@ -160,7 +160,7 @@
     height: auto;
 }
 
-.CheckOut .box_checkout .bill .proceed-to-checkout .selectPayment .checkout__input__checkbox input[type="checkbox"] {
+.CheckOut .box_checkout .bill .proceed-to-checkout .selectPayment .checkout__input__checkbox input[type="radio"] {
     display: none;
 }
 
@@ -174,7 +174,7 @@
 }
 
 /* Khi checkbox được chọn, thay đổi màu sắc và thêm biểu tượng check */
-.CheckOut .box_checkout .bill .proceed-to-checkout .selectPayment .checkout__input__checkbox input[type="checkbox"]:checked + span.checkmark {
+.CheckOut .box_checkout .bill .proceed-to-checkout .selectPayment .checkout__input__checkbox input[type="radio"]:checked + span.checkmark {
     background-color: var(--color-primary);
 }
 
@@ -191,7 +191,7 @@
     transform: rotate(45deg);
 }
 
-.CheckOut .box_checkout .bill .proceed-to-checkout .selectPayment .checkout__input__checkbox input[type="checkbox"]:checked + span.checkmark::after {
+.CheckOut .box_checkout .bill .proceed-to-checkout .selectPayment .checkout__input__checkbox input[type="radio"]:checked + span.checkmark::after {
     display: block;
 }
 

@@ -22,10 +22,8 @@ class ProductCategoryController extends Controller
         $checkNameIsExists = DB::table('product_category')->where('name', $request->name)->exists();
 
         if ($checkNameIsExists) {
-            // Nếu tên đã tồn tại, dừng thực thi và hiển thị thông báo
             return redirect()->route('admin.product_category.create')->with('message', 'Name is exists!');
         } else {
-            // Nếu tên chưa tồn tại, tiến hành chèn dữ liệu
             $result = DB::table('product_category')->insert([
                 'name' => $request->name,
                 'slug' => $request->slug,

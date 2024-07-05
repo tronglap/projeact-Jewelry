@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Client;
 
 use App\Events\OrderSuccessEvent;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\OrderCheckoutRequest;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\OrderPayment;
@@ -42,15 +43,16 @@ class CartController extends Controller
             return response()->json(['message' => 'Product not found!'], 404);
         } else {
             $cart = session()->get('cart', []);
-            $price = $product->promotion ?? $product->price;
+
 
             $cart[$productId] = [
                 'name' => $product->name,
                 'image_url' => $product->image_url,
                 'quantity' => isset($cart[$productId]) ? ($cart[$productId]['quantity'] + 1) : 1,
-                'price' => $price,
+                'price' => $product->price,
                 'promotion' => $product->promotion ?? null
             ];
+
 
             $totalProducts = count($cart);
             $totalPrice = array_sum(array_map(function ($item) {
@@ -59,7 +61,6 @@ class CartController extends Controller
 
             // Save in Session
             session()->put('cart', $cart);
-
             return response()->json([
                 'message' => 'Add Product To Cart Success',
                 'totalProducts' => $totalProducts,
@@ -70,7 +71,7 @@ class CartController extends Controller
 
     public function addProductItem(Request $request, string $productId)
     {
-        $qty = $request->qty; // Lấy số lượng từ request
+        $qty = $request->qty;
 
         $cart = session()->get('cart', []);
 
@@ -128,7 +129,7 @@ class CartController extends Controller
         }
     }
 
-    public function placeOrder(Request $request)
+    public function placeOrder(OrderCheckoutRequest $request)
     {
         try {
             DB::beginTransaction();
@@ -153,6 +154,7 @@ class CartController extends Controller
                 $orderItem->promotion = $item['promotion'] ?? null;
                 $orderItem->save(); // Insert
             }
+
 
             // Update phone for user
             $user = Auth::user();
@@ -226,7 +228,7 @@ class CartController extends Controller
                 event(new OrderSuccessEvent($order));
                 DB::commit();
             }
-            return redirect()->route('home')->with('success', 'Đặt hàng thành công');
+            return redirect()->route('home.cart.success')->with('success', 'Đặt hàng thành công');
         } catch (Exception $e) {
             DB::rollBack();
             throw new Exception($e->getMessage());
@@ -252,7 +254,7 @@ class CartController extends Controller
 
         $orderPayment = new OrderPayment();
         $orderPayment->total = $order->total;
-        $orderPayment->payment_method = 'vnpay';
+        $orderPayment->payment_method = 'VNPay';
         $orderPayment->status = $request->vnp_ResponseCode === '00' ? 'success' : 'fail';
         $orderPayment->reason = OrderPayment::RESPONSE_CODE_VNPAY[$request->vnp_ResponseCode];
         $orderPayment->order_id = $order->id;
@@ -266,6 +268,6 @@ class CartController extends Controller
             $message = 'Đặt hàng thất bại';
         }
         $orderPayment->save();
-        return redirect()->route('home')->with('message', $message);
+        return redirect()->route('home.cart.success')->with('message', $message);
     }
 }

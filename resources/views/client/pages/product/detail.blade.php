@@ -30,14 +30,14 @@
                             <div class="price">
                                 @if ($product['promotion'])
                                     <span class="discount active">
-                                        ${{ number_format($product['promotion'], 2) }}
+                                        ${{ number_format($product['promotion'], 2, '.', ',') }}
                                     </span>
                                     <span class="cost active">
-                                        ${{ number_format($product['price'], 2) }}
+                                        ${{ number_format($product['price'], 2, '.', ',') }}
                                     </span>
                                 @else
                                     <span class="cost">
-                                        ${{ number_format($product['price'], 2) }}
+                                        ${{ number_format($product['price'], 2, '.', ',') }}
                                     </span>
                                 @endif
                             </div>

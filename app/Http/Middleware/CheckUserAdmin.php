@@ -21,8 +21,8 @@ class CheckUserAdmin
         }
 
         $user = Auth::user();
-        if ($user->role !== 1) {
-            abort(403);
+        if ($user->role === 0) {
+            return redirect()->route('error');
         }
         return $next($request);
     }

@@ -44,3 +44,5 @@ Route::get('vnpayCallBack', [CartController::class, 'vnpayCallBack'])->name('vnp
 
 Route::get('/google/redirect', [GoogleController::class, 'redirect'])->name('google.redirect');
 Route::get('/google/login', [GoogleController::class, 'callback'])->name('google.callback');
+
+Route::get('404', [HomeController::class, 'error'])->name('error');

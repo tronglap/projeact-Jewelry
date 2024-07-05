@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Order;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use App\Models\OrderItem;
 use App\Models\OrderPayment;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -74,18 +75,32 @@ class OrderController extends Controller
             return redirect()->route('admin.order.index')->with('message', 'Order not found');
         }
 
-        $orderPayment = OrderPayment::all();
+        $orderPayment = OrderPayment::where('order_id', $id)->first();
+        $orderItems = OrderItem::where('order_id', $id)->get();
         $nameUser = User::all();
 
-        return view('admin.pages.order.detail', compact('data'), ['orderPayment' => $orderPayment, 'nameUser' => $nameUser]);
+        return view('admin.pages.order.detail', compact('data', 'orderPayment', 'nameUser', 'orderItems'));
     }
+
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function updateStatus(Request $request, $id)
     {
-        //
+        $order = Order::find($id);
+
+        if (!$order) {
+            return redirect()->route('admin.order.index')->with('message', 'Order not found');
+        }
+
+        $status = $request->input('status');
+
+        if ($order->updateStatus($status)) {
+            return redirect()->route('admin.order.index', $id)->with('message', 'Order status updated successfully');
+        }
+
+        return redirect()->route('admin.order.index', $id)->with('message', 'Invalid status');
     }
 
     /**

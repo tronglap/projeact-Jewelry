@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Models\Blog;
 use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 
@@ -16,9 +17,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-            $datas = Product::all();
-        return view('client.pages.home', ['datas' => $datas, 'isHome' => true]);
-
+    $datas = Product::all();
+    $blog = Blog::all();
+    return view('client.pages.home', ['datas' => $datas, 'blog' => $blog, 'isHome' => true]);
 });
 
 Route::get('/admin', function () {

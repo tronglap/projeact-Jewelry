@@ -112,7 +112,7 @@
                                                     alt="">
                                             </div>
                                             Cash on Delivery
-                                            <input type="checkbox" id="COD" name="payment_method" value="COD"
+                                            <input type="radio" id="COD" name="payment_method" value="COD"
                                                 onclick="checkOnlyOne(this)">
                                             <span class="checkmark"></span>
                                         </label>
@@ -124,7 +124,7 @@
                                                     alt="">
                                             </div>
                                             Credit Card/ Debit Card
-                                            <input type="checkbox" id="payment" name="payment_method" value="VNBANK"
+                                            <input type="radio" id="payment" name="payment_method" value="VNBANK"
                                                 onclick="checkOnlyOne(this)">
                                             <span class="checkmark"></span>
                                         </label>
@@ -136,7 +136,7 @@
                                                     alt="">
                                             </div>
                                             Master Card
-                                            <input type="checkbox" id="paypal" name="payment_method" value="INTCARD"
+                                            <input type="radio" id="paypal" name="payment_method" value="INTCARD"
                                                 onclick="checkOnlyOne(this)">
                                             <span class="checkmark"></span>
                                         </label>
