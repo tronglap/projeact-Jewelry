@@ -32,30 +32,30 @@
                                 <label for="name">Full name</label>
                                 <input type="text" value="{{ $user->name }}" name="name" />
                                 @error('name')
-                                    <span class="text-danger">{{ $message }}<span>
-                                        @enderror
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div class="input-text">
                                 <label for="phone">Phone</label>
                                 <input type="number" value="{{ old('phone') ?? $user->phone }}" name="phone" />
                                 @error('phone')
-                                    <span class="text-danger">{{ $message }}<span>
-                                        @enderror
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div class="input-text">
                                 <label for="address">Address</label>
                                 <input type="text" value="{{ old('address') ?? $user->address }}" name="address" />
                                 @error('address')
-                                    <span class="text-danger">{{ $message }}<span>
-                                        @enderror
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div class="input-text">
                                 <label for="email">Email address</label>
                                 <input type="email" value="{{ old('email') ?? $user->email }}" name="email"
                                     placeholder="Enter your mail" />
                                 @error('email')
-                                    <span class="text-danger">{{ $message }}<span>
-                                        @enderror
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div class="input-text">
                                 <h3 class="title-note">Additional information</h3>
@@ -97,8 +97,8 @@
                             <div class="total border-bottom">
                                 <p>Total</p>
                                 <div class="price d-flex align-items-center">
-                                    <span>$
-                                        {{ number_format(array_sum(array_map(function ($item) {return ($item['promotion'] ?? $item['price']) * $item['quantity'];}, $cart)),2,'.',',') }}
+                                    </span>$
+                                    {{ number_format(array_sum(array_map(function ($item) {return ($item['promotion'] ?? $item['price']) * $item['quantity'];}, $cart)),2,'.',',') }}
                                     </span>
                                 </div>
                             </div>
@@ -113,7 +113,7 @@
                                             </div>
                                             Cash on Delivery
                                             <input type="radio" id="COD" name="payment_method" value="COD"
-                                                onclick="checkOnlyOne(this)">
+                                                onclick="checkOnlyOne(this)" checked>
                                             <span class="checkmark"></span>
                                         </label>
                                     </div>

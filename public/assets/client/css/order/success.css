@@ -1,3 +1,23 @@
 .shop-now:hover {
     box-shadow: inset 250px 0 0 0 var(--color-primary);
 }
+
+.order-success {
+    padding: 2% 0 10% 0;
+}
+
+.order-success .container:nth-child(2) {
+    text-align: center;
+}
+
+.order-success .container .title {
+    font-family: var(--font-secondary);
+    font-weight: 400;
+    font-size: 50px;
+    margin-bottom: 2%;
+}
+
+.order-success .container .notification {
+    font-size: 30px;
+    margin: 3% 0;
+}

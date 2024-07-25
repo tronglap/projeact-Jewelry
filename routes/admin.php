@@ -34,6 +34,7 @@ Route::prefix('admin/product')
         Route::get('/create', [ProductController::class, 'create'])->name('create')->middleware('check.role.admin.staff');
         Route::post('/store', [ProductController::class, 'store'])->name('store')->middleware('check.role.admin.staff');
         Route::post('/slug', [ProductController::class, 'makeslug'])->name('slug');
+        Route::post('/calculate-the-discount-price', [ProductController::class, 'calculateDiscountPrice'])->name('calculate.the.discount.price');
         Route::get('/detail/{product}', [ProductController::class, 'detail'])->name('detail');
         Route::post('/update/{product}', [ProductController::class, 'update'])->name('update')->middleware('check.role.admin.staff');
         Route::delete('/destroy/{product}', [ProductController::class, 'destroy'])->name('destroy')->middleware('check.role.admin.staff');

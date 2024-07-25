@@ -237,7 +237,8 @@ caption {
 
 th {
     text-align: inherit;
-    text-align: -webkit-match-parent
+    text-align: -webkit-match-parent;
+    text-align: match-parent
 }
 
 label {
@@ -1784,7 +1785,7 @@ pre code {
 .table td,
 .table th {
     padding: .75rem;
-    vertical-align: top;
+    vertical-align: middle;
     border-top: 1px solid #e3e6f0
 }
 
@@ -11500,7 +11501,8 @@ a:focus {
 }
 
 .topbar.navbar-dark .navbar-nav .nav-item .nav-link {
-    color: rgba(255, 255, 255, .8)
+    color: rgba(255, 255, 255, .8);
+    transition: 0.3s linear;
 }
 
 .topbar.navbar-dark .navbar-nav .nav-item .nav-link:hover {
@@ -11512,7 +11514,8 @@ a:focus {
 }
 
 .topbar.navbar-light .navbar-nav .nav-item .nav-link {
-    color: #d1d3e2
+    color: #d1d3e2;
+    transition: 0.3s linear;
 }
 
 .topbar.navbar-light .navbar-nav .nav-item .nav-link:hover {
@@ -11529,7 +11532,8 @@ a:focus {
 }
 
 .sidebar .nav-item {
-    position: relative
+    position: relative;
+    transition: 0.3s linear;
 }
 
 .sidebar .nav-item:last-child {
@@ -11923,7 +11927,8 @@ a:focus {
 }
 
 .sidebar-dark .nav-item .nav-link {
-    color: rgba(255, 255, 255, .8)
+    color: rgba(255, 255, 255, .8);
+    transition: 0.3s linear;
 }
 
 .sidebar-dark .nav-item .nav-link i {

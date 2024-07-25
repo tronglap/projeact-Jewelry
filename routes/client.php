@@ -7,6 +7,7 @@ use App\Http\Controllers\Client\HomeController;
 use App\Http\Controllers\Client\ListProductController;
 use App\Http\Controllers\Client\RegisterUserController;
 use App\Http\Controllers\Client\GoogleController;
+use App\Http\Controllers\Client\PurchaseHistoryController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -36,8 +37,9 @@ Route::get('/get-cart-total', [CartController::class, 'getCartTotal'])->name('ge
 
 Route::prefix('home')->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
-    Route::get('register', [RegisterUserController::class, 'index'])->name('home.register');
+    Route::get('register', [RegisterUserController::class, 'index'])->name('home.register')->middleware('check.user.login');
 });
+
 Route::get('/api/search', [HomeController::class, 'search']);
 
 Route::get('vnpayCallBack', [CartController::class, 'vnpayCallBack'])->name('vnpayCallBack');
@@ -46,3 +48,5 @@ Route::get('/google/redirect', [GoogleController::class, 'redirect'])->name('goo
 Route::get('/google/login', [GoogleController::class, 'callback'])->name('google.callback');
 
 Route::get('404', [HomeController::class, 'error'])->name('error');
+
+Route::get('/history', [PurchaseHistoryController::class, 'index'])->name('history');

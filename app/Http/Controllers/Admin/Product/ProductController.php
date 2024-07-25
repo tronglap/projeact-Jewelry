@@ -13,9 +13,6 @@ use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index(Request $request)
     {
         $key = $request->key ?? null;
@@ -39,21 +36,19 @@ class ProductController extends Controller
         return view('admin.pages.Product.index', ['datas' => $datas]);
     }
 
-
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         $productCategories = ProductCategory::all();
         return view('admin.pages.Product.create', ['productCategories' => $productCategories]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(ProductStoreRequest $request)
     {
+        $existingProduct = Product::where('name', $request->name)->first();
+        if ($existingProduct) {
+            return redirect()->route('admin.product.create')->with('danger', 'Sản phẩm với tên này đã tồn tại!');
+        }
+
         $product = new Product();
         $product->name = $request['name'];
         $product->slug = $request['slug'];
@@ -74,11 +69,9 @@ class ProductController extends Controller
             $extension = $file->getClientOriginalExtension();
             $fileName = $fileName . '_' . uniqid() . '.' . $extension;
 
-            //move_uploaded_file()
             $file->move(public_path('assets/images/'), $fileName);
+            $product->image_url = $fileName;
         }
-
-        $product->image_url = $fileName;
 
         if ($request->hasFile('image_url_second')) {
             $file = $request->file('image_url_second');
@@ -88,12 +81,11 @@ class ProductController extends Controller
             $extension = $file->getClientOriginalExtension();
             $fileName = $fileName . '_' . uniqid() . '.' . $extension;
 
-            //move_uploaded_file()
             $file->move(public_path('assets/images_second/'), $fileName);
+            $product->image_url_second = $fileName;
         }
 
-        $product->image_url_second = $fileName;
-        $product->save(); // insert
+        $product->save();
 
         $message = $product ? 'Thêm sản phẩm thành công!' : 'Thêm sản phẩm thất bại!';
         return redirect()->route('admin.product.create')->with('message', $message);
@@ -105,6 +97,11 @@ class ProductController extends Controller
 
         if (!$product) {
             return redirect()->route('admin.product.index')->with('message', 'Không tìm thấy sản phẩm!');
+        }
+
+        $existingProduct = Product::where('name', $request->name)->where('id', '!=', $id)->first();
+        if ($existingProduct) {
+            return redirect()->back()->with('danger', 'Sản phẩm với tên này đã tồn tại!');
         }
 
         $product->update([
@@ -129,7 +126,6 @@ class ProductController extends Controller
             $fileName = $fileName . '_' . uniqid() . '.' . $extension;
 
             $file->move(public_path('assets/images/'), $fileName);
-
             $product->image_url = $fileName;
         }
 
@@ -142,25 +138,26 @@ class ProductController extends Controller
             $fileName = $fileName . '_' . uniqid() . '.' . $extension;
 
             $file->move(public_path('assets/images_second/'), $fileName);
-
             $product->image_url_second = $fileName;
         }
 
         $product->save();
 
-        $message = $product ? 'Cập nhật thông tim sản phẩm thành công!' : 'Cập nhật thông tim sản phẩm thất bại!';
+        $message = $product ? 'Cập nhật thông tin sản phẩm thành công!' : 'Cập nhật thông tin sản phẩm thất bại!';
         return redirect()->route('admin.product.index')->with('message', $message);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Product $product)
     {
+        if ($product->orderItems()->count() > 0) {
+            return redirect()->back()->with('danger', 'Không thể xóa sản phẩm vì có đơn hàng liên quan.');
+        }
+
         $result = $product->delete();
         $message = $result ? 'Xóa sản phẩm thành công!' : 'Xóa sản phẩm thất bại!';
-        return redirect()->route('admin.product.index')->with('message', $message);
+        return response()->json(['message' => $message], $result ? 200 : 500);
     }
+
     public function detail(Product $product)
     {
         $productCategories = ProductCategory::all();
@@ -172,5 +169,15 @@ class ProductController extends Controller
         $dataSlug = $request->slug;
         $slug = Str::slug($dataSlug);
         return response()->json(['slug' => $slug]);
+    }
+
+    public function calculateDiscountPrice(Request $request)
+    {
+        $price = $request->price;
+        $salePercent = $request->salePercent;
+
+        $discountPrice = $price - ($price * ($salePercent / 100));
+
+        return response()->json(['discountPrice' => $discountPrice]);
     }
 }

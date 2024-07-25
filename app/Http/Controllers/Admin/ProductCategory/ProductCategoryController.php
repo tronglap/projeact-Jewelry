@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin\ProductCategory;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductCategoryStoreRequest;
 use App\Http\Requests\ProductCategoryUpdateRequest;
+use App\Models\OrderItem;
+use App\Models\Product;
 use App\Models\ProductCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -22,7 +24,8 @@ class ProductCategoryController extends Controller
         $checkNameIsExists = DB::table('product_category')->where('name', $request->name)->exists();
 
         if ($checkNameIsExists) {
-            return redirect()->route('admin.product_category.create')->with('message', 'Tên danh mục đã tồn tại!');
+            $message = $checkNameIsExists ? 'Tên danh mục đã tồn tại!' : '';
+            return redirect()->back()->with('danger', $message);
         } else {
             $result = DB::table('product_category')->insert([
                 'name' => $request->name,
@@ -30,14 +33,10 @@ class ProductCategoryController extends Controller
                 'status' => $request->status
             ]);
 
-            if ($result) {
-                return redirect()->route('admin.product_category.create')->with('message', 'Tạo danh mục thành công!');
-            } else {
-                return redirect()->route('admin.product_category.create')->with('message', 'Tạo danh mục thất bại!');
-            }
+            $message = $result ? 'Tạo danh mục thành công!' : 'Tạo danh mục thất bại!';
+            return redirect()->route('admin.product_category.create')->with('message', $message);
         }
     }
-
 
     public function index(Request $request)
     {
@@ -92,24 +91,43 @@ class ProductCategoryController extends Controller
 
     public function update(ProductCategoryUpdateRequest $request, int $id)
     {
-        $result = ProductCategory::find($id)->update([
-            'name' => $request->name,
-            'slug' => $request->slug,
-            'status' => $request->status
-        ]);
+        $existingCategory = ProductCategory::where('name', $request->name)
+            ->where('id', '<>', $id)
+            ->first();
 
-        $message = $result ? 'Cập nhật danh muc thành công!' : 'Cập nhật danh muc thất bại!';
-        return redirect()->route('admin.product_category.index')->with('message', $message);
+        if ($existingCategory) {
+            $message = $existingCategory ? 'Tên danh mục đã tồn tại, vui lòng chọn tên khác!' : '';
+            return redirect()->back()->with('danger', $message);
+        } else {
+            $result = ProductCategory::find($id)->update([
+                'name' => $request->name,
+                'slug' => $request->slug,
+                'status' => $request->status
+            ]);
+
+            $message = $result ? 'Cập nhật danh mục thành công!' : 'Cập nhật danh mục thất bại!';
+            return redirect()->route('admin.product_category.index')->with('message', $message);
+        }
     }
+
     public function forceDelete(int $id)
     {
         $productCategory = ProductCategory::withTrashed()->find($id);
         if ($productCategory) {
-            $productCategory->forceDelete();
-            $message = 'Danh mục đã bị xóa vĩnh viễn!';
+            $productIds = Product::where('product_category_id', $id)->pluck('id')->toArray();
+
+            $hasOrderItems = OrderItem::whereIn('product_id', $productIds)->exists();
+            if ($hasOrderItems) {
+                $message = 'Không thể xóa danh mục vì có đơn hàng đang tham chiếu đến sản phẩm thuộc danh mục này!';
+                return response()->json(['status' => 'error', 'message' => $message]);
+            } else {
+                $productCategory->forceDelete();
+                $message = 'Danh mục đã bị xóa vĩnh viễn!';
+                return response()->json(['status' => 'success', 'message' => $message]);
+            }
         } else {
             $message = 'Không tìm thấy danh mục hoặc danh mục đã bị xóa vĩnh viễn!';
+            return response()->json(['status' => 'error', 'message' => $message]);
         }
-        return redirect()->route('admin.product_category.index')->with('message', $message);
     }
 }

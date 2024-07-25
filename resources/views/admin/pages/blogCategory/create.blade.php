@@ -33,11 +33,10 @@
                         <!-- general form elements -->
                         <div class="card card-primary">
                             @if (session('message'))
-                                @if (session('message') == 'Create Blog Category Success!')
-                                    <div class="alert alert-success">{{ session('message') }}</div>
-                                @elseif(session('message') == 'Name is exists!')
-                                    <div class="alert alert-warning">{{ session('message') }}</div>
-                                @endif
+                                <div class="alert alert-success">{{ session('message') }}</div>
+                            @endif
+                            @if (session('danger'))
+                                <div class="alert alert-danger">{{ session('danger') }}</div>
                             @endif
                             <!-- form start -->
                             <form role="form" method="post" action="{{ route('admin.blogCategories.store') }}">

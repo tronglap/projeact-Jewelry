@@ -6,7 +6,7 @@
         </a>
     </div>
     @if ($sale == 1)
-        <div class="sale active"></div>
+        <div class="sale active">SALE {{ $salepercent }}%</div>
     @endif
     <div class="info">
         <div class="cate">{{ $category }}</div>
@@ -15,11 +15,7 @@
         </a>
         <div class="material">diamond</div>
         <div class="price">
-            <!--
-            Kiểm tra sản phẩm có giảm giá hay không:
-            + Nếu sản phẩm không có giảm giá thì add class active vào class cost và class discount
-            + Nếu sản phẩm có giảm giá thì remove class active từ class cost và class discount -->
-            @if ($price <= 0 || $quantity <= 0)
+            @if ($price <= 0 || $quantity <= 10)
                 <span class="soldOut">
                     <span style="display:none">{{ $quantity }}</span>
                 </span>

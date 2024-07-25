@@ -22,6 +22,6 @@ class SendMailToCustomer
     {
         $order = $event->order;
 
-        Mail::to('tronglap0@gmail.com')->send(new OrderEmailCustomer($order));
+        Mail::to($order->user->email)->send(new OrderEmailCustomer($order));
     }
 }

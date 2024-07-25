@@ -16,20 +16,20 @@ var data = orderData
     .slice(1);
 
 var backgroundColors = [
-    "#4e73df",
-    "#1cc88a",
-    "#36b9cc",
-    "#f6c23e",
-    "#e74a3b",
-    "#858796",
+    "#ef476f",
+    "#f78c6b",
+    "#ffd166",
+    "#06d6a0",
+    "#118ab2",
+    "#073b4c",
 ];
 var hoverBackgroundColors = [
-    "#2e59d9",
-    "#17a673",
-    "#2c9faf",
-    "#f4b619",
-    "#e02d1b",
-    "#6e707e",
+    "#ff595e",
+    "#ff924c",
+    "#ffca3a",
+    "#2a9d8f",
+    "#1982c4",
+    "#00132d",
 ];
 
 var legendContainer = document.getElementById("order-status-legend");

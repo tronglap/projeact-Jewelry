@@ -96,4 +96,142 @@
             });
         });
     </script>
+
+    {{-- Soft Delete --}}
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#btn-soft-delete").on("click", function(e) {
+                e.preventDefault();
+
+                Swal.fire({
+                    title: "Bạn có chắc chắn muốn xóa?",
+                    text: "Hành động này sẽ tạm ẩn danh mục này!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#4e73df",
+                    cancelButtonColor: "#e74a3b",
+                    confirmButtonText: "Tôi đồng ý!",
+                    cancelButtonText: "Hủy",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        var formAction = $("#form-delete").attr("action");
+                        var csrfToken = "{{ csrf_token() }}";
+
+                        $.ajax({
+                            url: formAction,
+                            type: "POST",
+                            data: {
+                                _token: csrfToken,
+                            },
+                            success: function(response) {
+                                Swal.fire({
+                                    title: "Xóa thành công!",
+                                    text: "Danh mục này sẽ tạm thời ẩn đi.",
+                                    icon: "success",
+                                    confirmButtonColor: "#4e73df",
+                                }).then(() => {
+                                    location.reload();
+                                });
+                            },
+                            error: function(xhr) {
+                                Swal.fire("Lỗi!", "Đã xảy ra lỗi.", "error");
+                            },
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+
+    {{-- Restore Category --}}
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#btn-restore").on("click", function(e) {
+                e.preventDefault();
+
+                Swal.fire({
+                    title: "Bạn có chắc muốn phục hồi danh mục này?",
+                    text: "Hành động này sẽ phục hồi danh mục này!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#4e73df",
+                    cancelButtonColor: "#e74a3b",
+                    confirmButtonText: "Tôi đồng ý!",
+                    cancelButtonText: "Hủy",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        var formAction = $("#form-restore").attr("action");
+                        var csrfToken = "{{ csrf_token() }}";
+
+                        $.ajax({
+                            url: formAction,
+                            type: "POST",
+                            data: {
+                                _token: csrfToken,
+                            },
+                            success: function(response) {
+                                Swal.fire({
+                                    title: "Phục hồi thành công!",
+                                    text: "Danh mục này đã được phục hồi!",
+                                    icon: "success",
+                                    confirmButtonColor: "#4e73df",
+                                }).then(() => {
+                                    location.reload();
+                                });
+                            },
+                            error: function(xhr) {
+                                Swal.fire("Cảnh báo!", "Đã xảy ra lỗi!.", "error");
+                            },
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+
+    {{-- Force Delete --}}
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#btn-force-delete").on("click", function(e) {
+                e.preventDefault();
+
+                Swal.fire({
+                    title: "Bạn có chắc chắn muốn xóa vĩnh viễn danh mục này?",
+                    text: "Hành động này sẽ xóa vĩnh viễn danh mục này!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#4e73df",
+                    cancelButtonColor: "#e74a3b",
+                    confirmButtonText: "Tôi đồng ý!",
+                    cancelButtonText: "Hủy",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        var formAction = $("#form-force-delete").attr("action");
+                        var csrfToken = "{{ csrf_token() }}";
+
+                        $.ajax({
+                            url: formAction,
+                            type: "POST",
+                            data: {
+                                _token: csrfToken,
+                            },
+                            success: function(response) {
+                                Swal.fire({
+                                    title: "Xóa thành công!",
+                                    text: "Danh mục đã bị xóa vĩnh viễn.",
+                                    icon: "success",
+                                    confirmButtonColor: "#4e73df",
+                                }).then(() => {
+                                    location.reload();
+                                });
+                            },
+                            error: function(xhr) {
+                                Swal.fire("Cảnh báo!", "Đã xảy ra lỗi!.", "error");
+                            },
+                        });
+                    }
+                });
+            });
+        });
+    </script>
 @endsection

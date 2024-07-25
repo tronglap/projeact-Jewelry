@@ -17,22 +17,23 @@ class card extends Component
     public $imageurlsecond;
     public $quantity;
     public $sale;
+    public $salepercent;
     public $promotion;
     /**
      * Create a new component instance.
      */
-    public function __construct($name, $price, $category, $productid, $imageurl, $imageurlsecond, $quantity, $sale, $promotion)
+    public function __construct($name, $price, $category, $productid, $imageurl, $imageurlsecond, $quantity, $sale, $salepercent, $promotion)
     {
         $this->name = $name;
         $this->price = $price;
-
+        $this->promotion = $promotion;
         $this->category = $category;
         $this->productid = $productid;
         $this->imageurl = $imageurl;
         $this->imageurlsecond = $imageurlsecond;
         $this->quantity = $quantity;
         $this->sale = $sale;
-        $this->promotion = $promotion;
+        $this->salepercent = $salepercent;
     }
 
 

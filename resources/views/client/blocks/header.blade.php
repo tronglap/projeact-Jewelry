@@ -23,7 +23,7 @@
             </div>
             <div class="right">
                 @auth
-                    <a href="{{ url('/dashboard') }}" class="register">
+                    <a href="{{ url('/profile') }}" class="register">
                         {{ Auth::user()->name }}
                     </a>
                 @else

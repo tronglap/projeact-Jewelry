@@ -55,7 +55,8 @@
 
 .Card_item .sale {
     display: none;
-    width: 20%;
+    width: -moz-fit-content;
+    width: fit-content;
     color: white;
     padding: 2%;
     font-weight: 400;
@@ -68,9 +69,6 @@
     z-index: 1;
 }
 
-.Card_item .sale::before {
-    content: "SALE";
-}
 
 .Card_item .sale.active {
     display: block;

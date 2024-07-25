@@ -49,7 +49,7 @@
     cursor: pointer;
 }
 
-.ListProduct .box_product .container .row .col-lg-3 .Categories .diamonds .name{
+.ListProduct .box_product .container .row .col-lg-3 .Categories .diamonds .name {
     font-size: 18px;
     font-weight: 400;
     font-style: normal;
@@ -111,6 +111,8 @@
 
 .ListProduct .box_product .container .row .col-lg-9 .row .container .sorting .Count_AP {
     display: flex;
+    align-items: center;
+    gap: 5px;
     margin-bottom: 20px;
     padding: 10px;
 }

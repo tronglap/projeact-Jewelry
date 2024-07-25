@@ -14,6 +14,15 @@
         <x-client.breadcrumb firstlink="{{ route('home') }}" from="Home Page" secondlink="{{ route('home.register') }}"
             to="Register/Login"></x-client.breadcrumb>
         <div class="Template">
+            @if (session('message'))
+                <div class="row pb-5">
+                    <div class="col-md-12">
+                        <div class="alert alert-danger" role="alert">
+                            {{ session('message') }}
+                        </div>
+                    </div>
+                </div>
+            @endif
             <div class="row">
                 <div class="col-lg-5">
                     <div class="form">
@@ -21,12 +30,15 @@
                         <form action="{{ route('login') }}" method="POST">
                             @csrf
                             <x-input-label for="email" :value="__('Email address')" />
-                            <x-client.input type="email" id="email" name="email" class="input"
-                                placeholder="Enter your email..." required></x-client.input>
+                            <x-client.input type="email" id="email" name="email" value="{{ old('email') }}"
+                                class="input" placeholder="Enter your email..." required></x-client.input>
+                            <x-input-error :messages="$errors->get('email')" class="mt-2 d-block pb-2" />
 
                             <x-input-label for="password" :value="__('Password')" />
                             <x-client.input type="password" id="password" name="password" class="input"
                                 placeholder="Enter your pasword..." required></x-client.input>
+                            <x-input-error :messages="$errors->get('password')" class="mt-2 d-block pb-2" />
+
                             <a href="/" class="a">Lost your password?</a>
                             <x-client.button title="LOGIN" type="submit" class="btn-submit"></x-client.button>
                         </form>
@@ -47,15 +59,15 @@
                         <h2 class="form-title">Register</h2>
                         <form action="{{ route('register') }}" method="POST">
                             @csrf
-                            <x-input-label for="email" :value="__('Email address')" />
-                            <x-client.input type="email" id="email" name="email" class="input"
+                            <x-input-label for="emailRegister" :value="__('Email address')" />
+                            <x-client.input type="email" id="email" name="emailRegister" class="input"
                                 placeholder="Enter your email..." value="{{ old('email') }}" required></x-client.input>
-                            <x-input-error :messages="$errors->get('email')" class="m-2" />
+                            <x-input-error :messages="$errors->get('emailRegister')" class="m-2" />
 
-                            <x-input-label for="password" :value="__('Password')" />
-                            <x-client.input type="password" id="password" name="password" class="input"
+                            <x-input-label for="passwordRegister" :value="__('Password')" />
+                            <x-client.input type="password" id="password" name="passwordRegister" class="input"
                                 placeholder="Enter your pasword..." required></x-client.input>
-                            <x-input-error :messages="$errors->get('password')" class="m-2" />
+                            <x-input-error :messages="$errors->get('passwordRegister')" class="m-2" />
 
                             <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
                             <x-client.input id="password_confirmation" type="password" name="password_confirmation" required

@@ -16,7 +16,7 @@
         </div>
         <div class="container">
             <!-- Notifications Empty Cart Start -->
-            <div class="noti {{ !$cart || $cart === [] ? 'active' : '' }}">
+            <div id="noti" class="noti {{ count($cart) === 0 ? 'active' : '' }}">
                 <h1>Oops! Your cart is currently empty.</h1>
                 <a href="{{ route('home.shop') }}" class="btn-proceed">
                     <x-client.button title="Return shop" type="submit" class="btn-submit"></x-client.button>
@@ -24,8 +24,12 @@
             </div>
             <!-- Notifications Empty Cart End -->
             <!-- Cart start -->
-            <x-client.button title="Clear Cart" class="btn-delete-cart"></x-client.button>
-            <div id="table-cart" class="cart-product {{ !$cart || $cart === [] ? '' : 'active' }}">
+            <div id="table-cart" class="cart-product {{ count($cart) > 0 ? 'active' : '' }}">
+                <div class="row">
+                    <div class="col-lg-2">
+                        <x-client.button title="Clear Cart" class="btn-delete-cart mb-3 mt-0"></x-client.button>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-lg-8">
                         <div class="row">
@@ -36,7 +40,6 @@
                                 <div class="col">Product</div>
                                 <div class="col">Price</div>
                                 <div class="col">Quantity</div>
-                                <div class="col">Subtotal</div>
                             </div>
                             @foreach ($cart as $productId => $item)
                                 <div id="tr-{{ $productId }}"
@@ -84,14 +87,6 @@
                                             </button>
                                         </div>
                                     </div>
-                                    <div class="col">
-                                        <div class="subtotal" id="subtotal-{{ $productId }}">
-                                            <p>
-                                                <span>$</span>
-                                                {{ isset($item['promotion']) ? number_format($item['promotion'] * $item['quantity'], 2, '.', ',') : number_format($item['price'] * $item['quantity'], 2, '.', ',') }}
-                                            </p>
-                                        </div>
-                                    </div>
                                 </div>
                             @endforeach
                         </div>
@@ -131,6 +126,7 @@
 @section('myscript')
     <script type="text/javascript">
         $(document).ready(function() {
+            // Xóa toàn bộ sản phẩm trong giỏ hàng
             $(".btn-delete-cart").on("click", function(e) {
                 e.preventDefault();
                 $.ajax({
@@ -138,12 +134,21 @@
                     type: "GET",
                     success: function(response) {
                         $("#table-cart").empty();
-                        $(".noti").show();
-                        $('.count').html(response.totalProducts);
+                        updateTotalPrice();
+                        updateTotalProducts(response
+                            .totalProducts);
+                        if (response.totalProducts > 0) {
+                            $("#table-cart").addClass('active');
+                            $("#noti").removeClass('active');
+                        } else {
+                            $("#table-cart").removeClass('active');
+                            $("#noti").addClass('active');
+                        }
                     },
                 });
             });
 
+            // Xóa từng sản phẩm trong giỏ hàng
             $('.delete-product').on("click", function(e) {
                 e.preventDefault();
                 var productId = $(this).data("product-id");
@@ -153,21 +158,33 @@
                     type: "GET",
                     success: function(response) {
                         $('#tr-' + productId).empty();
-                        $('.count').html(response.totalProducts);
+                        updateTotalPrice();
+                        updateTotalProducts(response
+                            .totalProducts);
+
+                        if (response.totalProducts > 0) {
+                            $("#table-cart").addClass('active');
+                            $("#noti").removeClass('active');
+                        } else {
+                            $("#table-cart").removeClass('active');
+                            $("#noti").addClass('active');
+                        }
+                        Toast.fire({
+                            title: response.message,
+                            toast: true,
+                            timer: 3000
+                        });
                     },
                 });
             });
-        });
 
-        $(document).ready(function() {
             // Hàm để cập nhật tổng giá tiền
             function updateTotalPrice() {
                 $.ajax({
                     url: "{{ route('get.cart.total') }}",
                     type: 'GET',
                     success: function(response) {
-                        $('#totalPrice').html('<span>$</span>' + response
-                            .totalPriceFormatted);
+                        $('#totalPrice').html('<span>$</span>' + response.totalPriceFormatted);
                     },
                     error: function(xhr, status, error) {
                         console.error(error);
@@ -175,7 +192,12 @@
                 });
             }
 
-            // Gọi hàm này khi có thay đổi số lượng sản phẩm trong giỏ hàng
+            // Hàm để cập nhật tổng số sản phẩm
+            function updateTotalProducts(totalProducts) {
+                $('.total-product .number').html(totalProducts);
+            }
+
+            // Cập nhật số lượng sản phẩm trong giỏ hàng
             $('.minus, .plus').click(function(e) {
                 e.preventDefault();
 
@@ -195,6 +217,15 @@
                     }
                 }
 
+                if (currentQty > 5) {
+                    Toast.fire({
+                        title: 'Sản phẩm chỉ được mua tối đa 5 món.',
+                        toast: true,
+                        timer: 3000
+                    });
+                    return;
+                }
+
                 qtyInput.val(currentQty);
 
                 $.ajax({
@@ -205,7 +236,10 @@
                         qty: currentQty
                     },
                     success: function(response) {
-                        updateTotalPrice();
+                        updateTotalPrice
+                            ();
+                        updateTotalProducts(response
+                            .totalProducts);
                     },
                     error: function(xhr, status, error) {
                         console.error(xhr.responseText);
@@ -218,4 +252,6 @@
             });
         });
     </script>
+
+    <script src="{{ asset('assets/client/js/sweetnotification2.js') }}"></script>
 @endsection

@@ -12,9 +12,6 @@ use Illuminate\Support\Str;
 
 class BlogController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index(Request $request)
     {
         $key = $request->key ?? null;
@@ -38,20 +35,20 @@ class BlogController extends Controller
         return view('admin.pages.blog.index', ['datas' => $datas]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         $blogCategories = BlogCategories::all();
         return view('admin.pages.blog.create', ['blogCategories' => $blogCategories]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(BlogStoreRequest $request)
     {
+        $existingBlog = Blog::where('title', $request->title)->first();
+        if ($existingBlog) {
+            $message = $existingBlog ? 'Bài viết với tên này đã tồn tại!' : '';
+            return redirect()->back()->with('danger', $message);
+        }
+
         $blog = new Blog();
         $blog->title = $request['title'];
         $blog->slug = $request['slug'];
@@ -79,15 +76,18 @@ class BlogController extends Controller
         return redirect()->route('admin.blog.create')->with('message', $message);
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function update(BlogUpdateRequest $request, int $id)
     {
-        $blog = blog::find($id);
+        $blog = Blog::find($id);
 
         if (!$blog) {
             return redirect()->route('admin.blog.index')->with('message', 'Không tìm thấy bài viết!');
+        }
+
+        $existingBlog = Blog::where('title', $request->title)->where('id', '!=', $id)->first();
+        if ($existingBlog) {
+            $message = $existingBlog ? 'Bài viết với tên này đã tồn tại!' : '';
+            return redirect()->back()->with('danger', $message);
         }
 
         $blog->update([
@@ -118,9 +118,6 @@ class BlogController extends Controller
         return redirect()->route('admin.blog.index')->with('message', $message);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function makeSlug(Request $request)
     {
         $dataSlug = $request->slug;
@@ -128,9 +125,6 @@ class BlogController extends Controller
         return response()->json(['slug' => $slug]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function detail($id)
     {
         $data = Blog::find($id);
@@ -143,13 +137,20 @@ class BlogController extends Controller
         return view('admin.pages.blog.detail', compact('data'), ['blogCategories' => $blogCategories]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+    // public function destroy(Blog $blog)
+    // {
+    //     $result = $blog->delete();
+    //     $message = $result ? 'Xóa bài viết thành công!' : 'Có lỗi xảy ra, vui lòng thử lại!';
+    //     return redirect()->route('admin.blog.index')->with('message', $message);
+    // }
+
     public function destroy(Blog $blog)
     {
         $result = $blog->delete();
-        $message = $result ? 'Xóa bài viết thành công!' : 'Có lỗi xảy ra, vui lòng thử lại!';
-        return redirect()->route('admin.blog.index')->with('message', $message);
+        if ($result) {
+            return response()->json(['message' => 'Xóa bài viết thành công!'], 200);
+        } else {
+            return response()->json(['message' => 'Có lỗi xảy ra, vui lòng thử lại!'], 500);
+        }
     }
 }

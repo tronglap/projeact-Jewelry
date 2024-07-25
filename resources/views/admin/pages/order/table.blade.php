@@ -1,7 +1,7 @@
 <table id="tableOrder" class="table table-bordered">
     <thead>
-        <tr>
-            <th style="width: 10px">Number</th>
+        <tr style="text-align: center">
+            <th style="width: 50px">#</th>
             <th>Name</th>
             <th>Address</th>
             <th>Status</th>
@@ -12,13 +12,14 @@
     </thead>
     <tbody>
         @foreach ($datas as $data)
-            <tr>
-                <td>{{ $loop->iteration }}</td>
+            <tr style="text-align: center">
+                {{-- <td>{{ $loop->iteration }}</td> --}}
+                <td>{{ $data['id'] }}</td>
                 <td>{{ $data->User->name }}</td>
                 <td>{{ $data['address'] }}</td>
                 <td>{{ $data['status'] }}</td>
-                <td>{{ $data['created_at']->format('d/m/Y') }}</td>
-                <td>{{ $data['updated_at']->format('d/m/Y') }}</td>
+                <td>{{ $data['created_at']->format('d/m/Y H:i:s') }}</td>
+                <td>{{ $data['updated_at']->format('d/m/Y H:i:s') }}</td>
                 <td>
                     <a href="{{ route('admin.order.detail', ['order' => $data->id]) }}" class="btn btn-success">Detail</a>
                 </td>

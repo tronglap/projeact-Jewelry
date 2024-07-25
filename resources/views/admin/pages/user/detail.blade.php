@@ -30,16 +30,25 @@
                     <div class="col-md-12">
                         <!-- general form elements -->
                         <div class="card card-primary">
-                            @if (session('message'))
-                                <div class="row">
-                                    <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    @if (session('message'))
                                         <div class="alert alert-success" role="alert">
                                             {{ session('message') }}
                                         </div>
-                                    </div>
+                                    @endif
+                                    @if (session('danger'))
+                                        <div class="alert alert-danger" role="alert">
+                                            {{ session('danger') }}
+                                        </div>
+                                    @endif
                                 </div>
-                            @endif
-
+                            </div>
+                            <div class="card-footer" style="background: transparent">
+                                <a href="{{ route('admin.user.index') }}">
+                                    <button type="submit" class="btn btn-primary">Back to list</button>
+                                </a>
+                            </div>
                             <!-- form start -->
                             <form role="form" method="post"
                                 action="{{ route('admin.user.update', ['user' => $data['id']]) }}">
@@ -79,8 +88,8 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="dob">Date Of Birth</label>
-                                        <input type="date" name="dob" class="form-control" id="dob"
-                                            value="{{ old('dob') ?? $data['dob'] }}">
+                                        <input type="text" name="dob" class="form-control" id="dob"
+                                            value="{{ old('dob') ?? $data['dob'] }}" placeholder="Select your birthday">
                                         @error('dob')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -99,6 +108,21 @@
                                         @error('role')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="status">Status</label>
+                                        <select name="status" class="form-control" id="status">
+                                            <option value="">---Please Select---</option>
+                                            <option {{ old('status', $data['status']) == '0' ? 'selected' : '' }}
+                                                value="0">Block
+                                            </option>
+                                            <option {{ old('status', $data['status']) == '1' ? 'selected' : '' }}
+                                                value="1">Active
+                                            </option>
+                                        </select>
+                                        @error('status')
+                                            <span class="text-danger">{{ $message }}<span>
+                                                @enderror
                                     </div>
                                 </div>
                                 <!-- /.card-body -->
@@ -119,4 +143,14 @@
 @endsection
 
 @section('script')
+    <!--Format DOB-->
+    <script>
+        $(document).ready(function() {
+            $('#dob').datepicker({
+                format: 'dd/mm/yyyy',
+                autoclose: true,
+                todayHighlight: true
+            });
+        });
+    </script>
 @endsection

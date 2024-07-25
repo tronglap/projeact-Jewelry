@@ -71,7 +71,7 @@
                             </div>
                         </div>
                         <div class="addtocart row">
-                            @if ($product['quantity'] > 0)
+                            @if ($product['quantity'] > 10)
                                 {{-- <div class="count col-lg-4">
                                     <button class="minus click">
                                         <i class="fa-solid fa-minus"></i>
@@ -190,9 +190,15 @@
 
                         <section class="variable slider">
                             @foreach ($datas as $data)
+                                @php
+                                    $salepercent = number_format(
+                                        (($data->price - $data->promotion) / $data->price) * 100,
+                                        0,
+                                    );
+                                @endphp
                                 <x-client.card :name="$data->name" :price="number_format($data->price, 2, '.', ',')" :quantity="$data->quantity" :productid="['product' => $data->id]"
                                     :category="$data->ProductCategory->name" :imageurl="$data->image_url" :imageurlsecond="$data->image_url_second" :sale="$data->sale"
-                                    :promotion="number_format($data->promotion, 2, '.', ',')" />
+                                    :promotion="number_format($data->promotion, 2, '.', ',')" :salepercent="$salepercent" />
                             @endforeach
                         </section>
                     </div>
@@ -205,7 +211,6 @@
     <!-- Information Product End -->
 @endsection
 @section('myscript')
-    {{-- <script type="text/javascript" src="{{ asset('assets/client/js/minusPlus.js') }}"></script> --}}
     <script type="text/javascript">
         $(document).ready(function() {
             $('#btnAddToCart').on('click', function(event) {
@@ -221,19 +226,31 @@
                     },
                     success: function(response) {
                         $('#countItemsCart').html(response.totalProducts);
-                        // Lấy thông tin sản phẩm
                         var productName = "{{ $product['name'] }}";
                         var productImage =
                             "{{ asset('assets/images/' . $product['image_url']) }}";
-
-                        // Hiển thị thông báo Toast
                         Toast.fire({
-                            icon: 'success',
-                            html: '<div class="toast-content"><img src="' +
-                                productImage + '" alt="' + productName + '" /><span>' +
-                                'Add product success' +
-                                '</span></div>'
+                            html: '<div class="toast-content">' +
+                                '<div class="row">' +
+                                '<div class="col-lg-4">' +
+                                '<img src="' + productImage + '" alt="' + productName +
+                                '" />' +
+                                '</div>' +
+                                '<div class="col-lg-8">' +
+                                '<span>' + response.message + '</span>' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>'
                         });
+                    },
+                    error: function(xhr) {
+                        if (xhr.status === 400) {
+                            var response = JSON.parse(xhr.responseText);
+                            Toast.fire({
+                                html: '<div class="toast-content"><span>' + response
+                                    .message + '</span></div>'
+                            });
+                        }
                     },
                     statusCode: {
                         401: function() {
@@ -244,6 +261,4 @@
             });
         });
     </script>
-
-    <script src="{{ asset('assets/client/js/sweetnotification2.js') }}"></script>
 @endsection

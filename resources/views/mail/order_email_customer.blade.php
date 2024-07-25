@@ -255,7 +255,9 @@
 
             /*PRODUCT*/
             .product-entry {
-                display: block;
+                display: flex;
+                align-items: center;
+                gap: 10px;
                 position: relative;
                 float: left;
                 padding-top: 20px;
@@ -358,12 +360,17 @@
                     <tr>
                         <td valign="top" class="bg_white" style="padding: 0 2.5em;">
                             <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
-                                <tr style="border-bottom: 1px solid rgba(0,0,0,.05);">
-                                    <th width="60%" style="text-align:left; padding: 0 2.5em; color: #000;">Item</th>
-                                    <th width="20%" style="text-align:center; padding: 0 2.5em; color: #000;">
+                                <tr
+                                    style="border-bottom: 1px solid rgba(0,0,0,.05);border-top: 1px solid rgba(0,0,0,.05); padding:1em 0">
+                                    <th width="60%"
+                                        style="text-align:center; padding: 0 2.5em; color: #000; font-size: 20px">Item
+                                    </th>
+                                    <th width="40%"
+                                        style="text-align:center; padding: 0 2.5em; color: #000;font-size: 20px">
                                         Quantity
                                     </th>
-                                    <th width="20%" style="text-align:center; padding: 0 2.5em; color: #000;">Price
+                                    <th width="20%"
+                                        style="text-align:center; padding: 0 2.5em; color: #000;font-size: 20px">Price
                                     </th>
                                 </tr>
                                 @php $totalPrice = 0; @endphp
@@ -371,23 +378,24 @@
                                     @php $totalPrice += $item->price * $item->quantity; @endphp
                                     <tr style="border-bottom: 1px solid rgba(0,0,0,.05);">
                                         <td valign="middle" style="text-align:left; padding: 1em 2.5em;">
-                                            <div>
-                                                <h3>{{ $item->name }}</h3>
+                                            <div class="product-entry">
+                                                <h3 style="color:#000000;font-size: 15px">{{ $item->name }}</h3>
                                             </div>
                                         </td>
                                         <td valign="middle" style="text-align:center; padding: 1em 2.5em;">
-                                            <span style="color: #000;">{{ $item->quantity }}</span>
+                                            <span style="color: #000;font-size: 15px">{{ $item->quantity }}</span>
                                         </td>
                                         <td valign="middle" style="text-align:center; padding: 1em 2.5em;">
                                             <span
-                                                style="color: #000;">${{ number_format($item->price * $item->quantity, 2, '.', ',') }}</span>
+                                                style="color: #000;font-size: 15px">${{ number_format($item->price * $item->quantity, 2, '.', ',') }}</span>
                                         </td>
                                     </tr>
                                 @endforeach
                                 <!-- Total Price -->
                                 <tr>
-                                    <td colspan="2" valign="middle" style="text-align:left; padding: 1em 2.5em;">
-                                        <p style="color: #000;">Total: ${{ number_format($totalPrice, 2, '.', ',') }}
+                                    <td colspan="12" valign="middle" style="text-align:right; padding: 1em 2em;">
+                                        <p style="color: #000; font-size:20px">Total:
+                                            ${{ number_format($totalPrice, 2, '.', ',') }}
                                         </p>
                                     </td>
                                 </tr>

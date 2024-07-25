@@ -23,11 +23,12 @@ class UserStoreRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email',
+            'email' => 'required|email:rfc,dns|unique:users,email',
             'phone' => 'nullable|string|max:15',
             'address' => 'nullable|string|max:255',
-            'dob' => 'nullable|date',
+            'dob' => 'nullable|date_format:d/m/Y',
             'role' => 'required|in:0,1,2',
+            'status' => 'required|in:0,1',
         ];
     }
 
@@ -38,12 +39,14 @@ class UserStoreRequest extends FormRequest
             'name.max' => 'Tên không được vượt quá 255 ký tự.',
             'email.required' => 'Email là bắt buộc.',
             'email.email' => 'Vui lòng nhập địa chỉ email hợp lệ.',
-            'email.unique' => 'Địa chỉ email đã tồn tại.',
+            'email.unique' => 'Địa chỉ email đã tồn tại!',
             'phone.max' => 'Số điện thoại không được vượt quá 15 ký tự.',
             'address.max' => 'Địa chỉ không được vượt quá 255 ký tự.',
-            'dob.date' => 'Ngày sinh phải là ngày hợp lệ.',
-            'role.required' => 'Vai trò là bắt buộc.',
-            'role.in' => 'Vai trò được chọn không hợp lệ.',
+            'dob.date_format' => 'Ngày sinh phải có định dạng dd/mm/yyyy.',
+            'role.required' => 'Vai trò là bắt buộc!',
+            'role.in' => 'Vai trò được chọn không hợp lệ!',
+            'status.required' => 'Hãy chọn trạng thái!',
+            'status.in' => 'Trạng thái không hợp lệ!',
         ];
     }
 }

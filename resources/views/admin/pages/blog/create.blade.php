@@ -32,15 +32,20 @@
                     <div class="col-md-12">
                         <!-- general form elements -->
                         <div class="card card-primary">
-                            @if (session('message'))
-                                <div class="row">
-                                    <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    @if (session('message'))
                                         <div class="alert alert-success" role="alert">
                                             {{ session('message') }}
                                         </div>
-                                    </div>
+                                    @endif
+                                    @if (session('danger'))
+                                        <div class="alert alert-danger" role="alert">
+                                            {{ session('danger') }}
+                                        </div>
+                                    @endif
                                 </div>
-                            @endif
+                            </div>
                             <!-- form start -->
 
                             <form role="form" method="post" action="{{ route('admin.blog.store') }}"
@@ -51,31 +56,31 @@
                                         <label for="image_url">Image</label>
                                         <input type="file" name="image_url" class="form-control" id="image_url">
                                         @error('image_url')
-                                            <span class="text-danger">{{ $message }}<span>
-                                                @enderror
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                     <div class="form-group">
                                         <label for="title">Title</label>
                                         <input type="text" value="{{ old('title') }}" name="title"
                                             class="form-control" id="title" placeholder="Enter title">
                                         @error('title')
-                                            <span class="text-danger">{{ $message }}<span>
-                                                @enderror
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                     <div class="form-group">
                                         <label for="slug">Slug</label>
                                         <input type="text" value="{{ old('slug') }}" name="slug"
                                             class="form-control" id="slug" placeholder="Enter slug">
                                         @error('slug')
-                                            <span class="text-danger">{{ $message }}<span>
-                                                @enderror
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                     <div class="form-group">
                                         <label for="content">Content</label>
                                         <textarea name="content" class="form-control" id="contentBlog">{{ old('content') }}</textarea>
                                         @error('content')
-                                            <span class="text-danger">{{ $message }}<span>
-                                                @enderror
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                     <div class="form-group">
                                         <label for="status">Status</label>
@@ -87,8 +92,8 @@
                                             </option>
                                         </select>
                                         @error('status')
-                                            <span class="text-danger">{{ $message }}<span>
-                                                @enderror
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                     <div class="form-group">
                                         <label for="blog_category_id">Blog Category</label>
@@ -102,8 +107,8 @@
                                             @endforeach
                                         </select>
                                         @error('blog_category_id')
-                                            <span class="text-danger">{{ $message }}<span>
-                                                @enderror
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                     <!-- /.card-body -->
 

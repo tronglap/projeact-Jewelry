@@ -26,12 +26,18 @@ document.getElementById("search").addEventListener("input", function () {
                         let productElement = document.createElement("div");
                         productElement.className = "product-item-search";
                         productElement.innerHTML = `
-                            <a href="/home/shop/detail/${product.id}" class="product-link">
+                            <a href="/home/shop/detail/${
+                                product.id
+                            }" class="product-link">
                                 <div class="thumb">
-                                    <img src="/assets/images/${product.image_url}" alt="${product.name}">
+                                    <img src="/assets/images/${
+                                        product.image_url
+                                    }" alt="${product.name}">
                                 </div>
                                 <div class="product-content">
-                                    <h3 class="product-title">${product.name}</h3>
+                                    <h3 class="product-title">${
+                                        product.name
+                                    }</h3>
                                     <div class="product-price">
                                         ${
                                             product.promotion
@@ -44,13 +50,15 @@ document.getElementById("search").addEventListener("input", function () {
                                                   )}</span>`
                                                 : ""
                                         }
-                                        <span class="price original-price ${product.promotion ? 'active' : ''}">${product.price.toLocaleString(
-                                            "en-US",
-                                            {
-                                                style: "currency",
-                                                currency: "USD",
-                                            }
-                                        )}</span>
+                                        <span class="price original-price ${
+                                            product.promotion ? "active" : ""
+                                        }">${product.price.toLocaleString(
+                            "en-US",
+                            {
+                                style: "currency",
+                                currency: "USD",
+                            }
+                        )}</span>
                                     </div>
                                 </div>
                             </a>
@@ -64,7 +72,8 @@ document.getElementById("search").addEventListener("input", function () {
                         resultContainer.classList.remove("scrollable");
                     }
                 } else {
-                    resultContainer.innerHTML = '<div class="no-results">No results found</div>';
+                    resultContainer.innerHTML =
+                        '<div class="no-results">No results found</div>';
                 }
             });
     } else {

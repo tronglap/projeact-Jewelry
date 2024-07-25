@@ -34,11 +34,16 @@ class AuthenticatedSessionController extends Controller
         // Lấy thông tin người dùng hiện tại
         $user = Auth::user();
 
-        // Điều hướng dựa trên vai trò của người dùng
-        if ($user->role === 1 || $user->role === 2) {
-            return redirect()->intended(RouteServiceProvider::ADMIN);
+        if ($user->status === 0) {
+            Auth::logout();
+            return redirect()->route('home.register')->with('message', 'Tài khoản của bạn đã bị khoá.');
         } else {
-            return redirect()->intended(RouteServiceProvider::HOME);
+            // Điều hướng dựa trên vai trò của người dùng
+            if ($user->role === 1 || $user->role === 2) {
+                return redirect()->intended(RouteServiceProvider::ADMIN);
+            } else {
+                return redirect()->intended(RouteServiceProvider::HOME);
+            }
         }
     }
 

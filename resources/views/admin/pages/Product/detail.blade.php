@@ -31,21 +31,32 @@
                     <div class="col-md-12">
                         <!-- general form elements -->
                         <div class="card card-primary">
-                            @if (session('message'))
-                                <div class="row">
-                                    <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    @if (session('message'))
                                         <div class="alert alert-success" role="alert">
                                             {{ session('message') }}
                                         </div>
-                                    </div>
+                                    @endif
+                                    @if (session('danger'))
+                                        <div class="alert alert-danger" role="alert">
+                                            {{ session('danger') }}
+                                        </div>
+                                    @endif
                                 </div>
-                            @endif
+                            </div>
+                            <div class="card-footer" style="background: transparent">
+                                <a href="{{ route('admin.product.index') }}">
+                                    <button type="submit" class="btn btn-primary">Back to list</button>
+                                </a>
+                            </div>
                             <!-- form start -->
                             <form role="form" method="post"
                                 action="{{ route('admin.product.update', ['product' => $data->id]) }}"
                                 enctype="multipart/form-data">
                                 @csrf
                                 <div class="card-body">
+                                    <p>Created at: {{ $data['created_at'] }}</p>
                                     <div class="form-group">
                                         <label for="name">Name</label>
                                         <input type="text" value="{{ old('name') ?? $data['name'] }}" name="name"
@@ -79,10 +90,18 @@
                                         @enderror
                                         <div id="promotion-field" style="display: none;">
                                             <div class="form-group">
+                                                <label for="salePercent">Sale Percent (%)</label>
+                                                <input type="number" name="salePercent"
+                                                    value="{{ old('salePercent') ?? number_format((($data['price'] - $data['promotion']) / $data['price']) * 100, 0) }}"
+                                                    class="form-control" id="salePercent">
+                                                @error('salePercent')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                            <div class="form-group">
                                                 <label for="promotion">Promotion</label>
-                                                <input type="number" value="{{ old('promotion', $data['promotion']) }}"
-                                                    name="promotion" class="form-control" id="promotion"
-                                                    placeholder="Enter promotion">
+                                                <input type="number" class="form-control" name="promotion" id="promotion"
+                                                    value="{{ old('promotion') ?? $data['promotion'] }}" readonly>
                                                 @error('promotion')
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror
@@ -233,6 +252,29 @@
                     $('#promotion-field').slideDown();
                 } else {
                     $('#promotion-field').slideUp();
+                }
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#salePercent').on('input', function() {
+                var price = $('#price').val();
+                var salePercent = $(this).val();
+
+                if (price && salePercent) {
+                    $.ajax({
+                        method: 'POST',
+                        url: "{{ route('admin.product.calculate.the.discount.price') }}",
+                        data: {
+                            price: price,
+                            salePercent: salePercent,
+                            _token: '{{ csrf_token() }}'
+                        },
+                        success: function(result) {
+                            $('#promotion').val(result.discountPrice);
+                        }
+                    });
                 }
             });
         });

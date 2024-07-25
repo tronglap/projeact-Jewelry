@@ -32,22 +32,33 @@
                     <div class="col-md-12">
                         <!-- general form elements -->
                         <div class="card card-primary">
-                            @if (session('message'))
-                                <div class="row">
-                                    <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    @if (session('message'))
                                         <div class="alert alert-success" role="alert">
                                             {{ session('message') }}
                                         </div>
-                                    </div>
+                                    @endif
+                                    @if (session('danger'))
+                                        <div class="alert alert-danger" role="alert">
+                                            {{ session('danger') }}
+                                        </div>
+                                    @endif
                                 </div>
-                            @endif
-                            <!-- form start -->
+                            </div>
 
+                            <!-- form start -->
+                            <div class="card-footer" style="background: transparent">
+                                <a href="{{ route('admin.blog.index') }}">
+                                    <button type="submit" class="btn btn-primary">Back to list</button>
+                                </a>
+                            </div>
                             <form role="form" method="post"
                                 action="{{ route('admin.blog.update', ['blog' => $data->id]) }}"
                                 enctype="multipart/form-data">
                                 @csrf
                                 <div class="card-body">
+                                    <p>Created at: {{ $data['created_at'] }}</p>
                                     <div class="form-group">
                                         <label for="image_url">Image</label>
                                         <input type="file" name="image_url" class="form-control" id="image_url">
@@ -115,17 +126,16 @@
                                                 @enderror
                                     </div>
                                     <!-- /.card-body -->
-
-                                    <div class="card-footer">
-                                        <button type="submit" class="btn btn-primary">Update</button>
-                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <button type="submit" class="btn btn-success">Update</button>
+                                </div>
                             </form>
+                            <!-- /.card -->
                         </div>
-                        <!-- /.card -->
                     </div>
-                </div>
-                <!-- /.row -->
-            </div><!-- /.container-fluid -->
+                    <!-- /.row -->
+                </div><!-- /.container-fluid -->
         </section>
         <!-- /.content -->
     </div>
@@ -135,11 +145,11 @@
 @section('script')
     <script type="text/javascript">
         $(document).ready(function() {
-            $('#name').on('keyup', function() {
+            $('#title').on('keyup', function() {
                 var name = $(this).val();
                 $.ajax({
-                    method: 'POST', //method of form
                     url: "{{ route('admin.blog.slug') }}", // action of form
+                    method: 'POST', //method of form
                     data: {
                         slug: name,
                         _token: '{{ csrf_token() }}'

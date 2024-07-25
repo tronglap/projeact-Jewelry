@@ -54,10 +54,31 @@
                                             <option value="oldest" {{ request()->sortBy == 'oldest' ? 'selected' : '' }}>
                                                 Oldest</option>
                                         </select>
+                                        <label for="sortByStatus">Sort by status</label>
+                                        <select name="sortByStatus" id="sortByStatus" class="form-control">
+                                            <option value="">--Please Select--</option>
+                                            <option value="{{ \App\Models\Order::PENDING }}"
+                                                {{ request()->sortByStatus == \App\Models\Order::PENDING ? 'selected' : '' }}>
+                                                Pending</option>
+                                            <option value="{{ \App\Models\Order::DELIVERED }}"
+                                                {{ request()->sortByStatus == \App\Models\Order::DELIVERED ? 'selected' : '' }}>
+                                                Delivered</option>
+                                            <option value="{{ \App\Models\Order::SHIPPING }}"
+                                                {{ request()->sortByStatus == \App\Models\Order::SHIPPING ? 'selected' : '' }}>
+                                                Shipping</option>
+                                            <option value="{{ \App\Models\Order::COMPLETED }}"
+                                                {{ request()->sortByStatus == \App\Models\Order::COMPLETED ? 'selected' : '' }}>
+                                                Completed</option>
+                                            <option value="{{ \App\Models\Order::CANCELED }}"
+                                                {{ request()->sortByStatus == \App\Models\Order::CANCELED ? 'selected' : '' }}>
+                                                Canceled</option>
+                                            <option value="{{ \App\Models\Order::REFUND }}"
+                                                {{ request()->sortByStatus == \App\Models\Order::REFUND ? 'selected' : '' }}>
+                                                Refund</option>
+                                        </select>
                                     </div>
                                 </form>
                             </div>
-
                             <div class="card-body">
                                 <div id="table-content">
                                     @include('admin.pages.order.table', ['datas' => $datas])
@@ -74,15 +95,17 @@
 @section('script')
     <script>
         $(document).ready(function() {
-            $('#searchKey, #sortBy').on('input change', function() {
+            $('#searchKey, #sortBy, #sortByStatus').on('input change', function() {
                 let query = $('#searchKey').val();
                 let sortBy = $('#sortBy').val();
+                let sortByStatus = $('#sortByStatus').val();
                 $.ajax({
                     url: '{{ route('admin.order.index') }}',
                     type: 'GET',
                     data: {
                         key: query,
-                        sortBy: sortBy
+                        sortBy: sortBy,
+                        sortByStatus: sortByStatus,
                     },
                     success: function(data) {
                         $('#table-content').html(data);

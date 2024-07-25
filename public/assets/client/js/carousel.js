@@ -35,20 +35,18 @@ $(document).ready(function () {
                     dots: false,
                 },
             },
-            // You can unslick at a given breakpoint now by adding:
-            // settings: "unslick"
-            // instead of a settings object
         ],
     });
 });
 
+// Carosel Product
 $(document).ready(function () {
     $(".variable").slick({
         dots: false,
         infinite: false,
         speed: 300,
         slidesToShow: 4,
-        slidesToScroll: 1,
+        slidesToScroll: 2,
         infinite: true,
         autoplay: true,
         autoplaySpeed: 2000,
@@ -79,9 +77,6 @@ $(document).ready(function () {
                     dots: false,
                 },
             },
-            // You can unslick at a given breakpoint now by adding:
-            // settings: "unslick"
-            // instead of a settings object
         ],
     });
 });

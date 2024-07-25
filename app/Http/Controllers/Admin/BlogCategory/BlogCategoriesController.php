@@ -52,10 +52,11 @@ class BlogCategoriesController extends Controller
      */
     public function store(BlogCategoriesStoreRequest $request)
     {
-        $checkNameIsExists = DB::table('blog_categories')->where('name', $request->name)->exists();
+        $checkNameIsExists = BlogCategories::where('name', $request->name)->exists();
 
         if ($checkNameIsExists) {
-            return redirect()->route('admin.blogCategories.create')->with('message', 'Danh mục đã tồn tại!');
+            $message = $checkNameIsExists ? 'Danh mục đã tồn tại!' : '';
+            return redirect()->back()->with('danger', $message);
         } else {
             //fresh data
             $result = DB::table('blog_categories')->insert([
@@ -76,7 +77,6 @@ class BlogCategoriesController extends Controller
     {
         $data = BlogCategories::find($id);
 
-        // Kiểm tra xem dữ liệu có được tìm thấy không
         if (!$data) {
             return redirect()->route('admin.blogCategories.index')->with('message', 'Không tìm thấy danh mục!');
         }
@@ -107,8 +107,8 @@ class BlogCategoriesController extends Controller
                 ->first();
 
             if ($existingCategory) {
-                $message = 'Tên đã tồn tại, vui lòng chọn tên khác!';
-                return redirect()->route('admin.blogCategories.index')->with('message', $message);
+                $message = $existingCategory ? 'Tên đã tồn tại, vui lòng chọn tên khác!' : '';
+                return redirect()->back()->with('danger', $message);
             }
         }
 

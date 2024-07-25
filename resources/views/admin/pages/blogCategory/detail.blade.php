@@ -33,19 +33,21 @@
                         <!-- general form elements -->
                         <div class="card card-primary">
                             @if (session('message'))
-                                @if (session('message') == 'Update blog category successfully!')
-                                    <div class="alert alert-success">{{ session('message') }}</div>
-                                @elseif(session('message') == 'Update blog category failed')
-                                    <div class="alert alert-warning">{{ session('message') }}</div>
-                                @else
-                                    <div class="alert alert-danger">{{ session('message') }}</div>
-                                @endif
+                                <div class="alert alert-success">{{ session('message') }}</div>
                             @endif
-
+                            @if (session('danger'))
+                                <div class="alert alert-danger">{{ session('danger') }}</div>
+                            @endif
+                            <div class="card-footer" style="background: transparent">
+                                <a href="{{ route('admin.blogCategories.index') }}">
+                                    <button type="submit" class="btn btn-primary">Back to list</button>
+                                </a>
+                            </div>
                             <!-- form start -->
                             <form role="form" method="post"
-                                action="{{ route('admin.blogCategories.update', ['id' => $data->id]) }}">
+                                action="{{ route('admin.blogCategories.update', ['blogCategory' => $data->id]) }}">
                                 <div class="card-body">
+                                    <p>Created at: {{ $data['created_at'] }}</p>
                                     <div class="form-group">
                                         <label for="name">Name</label>
                                         <input type="text" name="name" value="{{ old('name') ?? $data['name'] }}"
@@ -82,7 +84,7 @@
 
                                 <div class="card-footer">
                                     @csrf
-                                    <button type="submit" class="btn btn-primary">Update</button>
+                                    <button type="submit" class="btn btn-success">Update</button>
                                 </div>
                             </form>
                         </div>

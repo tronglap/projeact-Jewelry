@@ -64,7 +64,7 @@
                                                         <p>Email: {{ $data->User->email }}</p>
                                                         <p>Phone: {{ $data->User->phone }}</p>
                                                         <p>Note: {{ $data->note ?? 'Nothing' }}</p>
-                                                        <p>Total: $ {{ number_format($data->total, 2) }}</p>
+                                                        <p>Total: ${{ number_format($data->total, 2) }}</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -81,8 +81,8 @@
                                                     <div class="card-body">
                                                         <table id="tableOrderItems" class="table table-bordered">
                                                             <thead>
-                                                                <tr>
-                                                                    <th style="width: 10px">Number</th>
+                                                                <tr style="text-align: center;">
+                                                                    <th style="width: 50px">#</th>
                                                                     <th>Name</th>
                                                                     <th>Price</th>
                                                                     <th>Promotion</th>
@@ -92,7 +92,7 @@
                                                             </thead>
                                                             <tbody>
                                                                 @foreach ($orderItems as $item)
-                                                                    <tr>
+                                                                    <tr style="text-align: center;">
                                                                         <td>{{ $loop->iteration }}</td>
                                                                         <td>{{ $item->name }}</td>
                                                                         <td>${{ number_format($item->price, 2, '.', ',') }}
@@ -128,33 +128,31 @@
                                                         </p>
                                                         <p>Order date: {{ $data->created_at->format('d/m/Y H:i:s') }}
                                                         </p>
-                                                        <form action="{{ route('admin.order.updateStatus', $data->id) }}"
-                                                            method="POST">
-                                                            @csrf
-                                                            <div class="form-group">
-                                                                <label for="status">Update Status:</label>
-                                                                <select name="status" id="status" class="form-control">
-                                                                    <option value="{{ \App\Models\Order::PENDING }}"
-                                                                        {{ $data->status == \App\Models\Order::PENDING ? 'selected' : '' }}>
-                                                                        Pending</option>
-                                                                    <option value="{{ \App\Models\Order::SHIPPED }}"
-                                                                        {{ $data->status == \App\Models\Order::SHIPPED ? 'selected' : '' }}>
-                                                                        Shipped</option>
-                                                                    <option value="{{ \App\Models\Order::DELIVERED }}"
-                                                                        {{ $data->status == \App\Models\Order::DELIVERED ? 'selected' : '' }}>
-                                                                        Delivered</option>
-                                                                    <option value="{{ \App\Models\Order::CANCELED }}"
-                                                                        {{ $data->status == \App\Models\Order::CANCELED ? 'selected' : '' }}>
-                                                                        Canceled</option>
-                                                                    <option value="{{ \App\Models\Order::REFUND }}"
-                                                                        {{ $data->status == \App\Models\Order::REFUND ? 'selected' : '' }}>
-                                                                        Refund</option>
-                                                                </select>
-                                                            </div>
-                                                            <button type="submit" class="btn btn-success">Update
-                                                                Status</button>
-                                                        </form>
-
+                                                        <p>Updated by: {{ $data->updater->name }} </p>
+                                                        @if (count($data->getNextStatuses()) > 0)
+                                                            <form
+                                                                action="{{ route('admin.order.updateStatus', $data->id) }}"
+                                                                method="POST">
+                                                                @csrf
+                                                                <p>Current order status: {{ $data->status }}</p>
+                                                                <div class="form-group">
+                                                                    <label for="status">Update Status:</label>
+                                                                    <select name="status" id="status"
+                                                                        class="form-control">
+                                                                        @foreach ($data->getNextStatuses() as $status)
+                                                                            <option value="{{ $status }}"
+                                                                                {{ $data->status == $status ? 'selected' : '' }}>
+                                                                                {{ ucfirst(strtolower($status)) }}
+                                                                            </option>
+                                                                        @endforeach
+                                                                    </select>
+                                                                </div>
+                                                                <button type="submit" class="btn btn-success">Update
+                                                                    Status</button>
+                                                            </form>
+                                                        @else
+                                                            <p>Status order: {{ ucfirst(strtolower($data->status)) }}</p>
+                                                        @endif
                                                     </div>
                                                 </div>
                                             </div>

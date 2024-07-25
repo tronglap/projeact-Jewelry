@@ -28,15 +28,20 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card">
-                            @if (session('message'))
-                                <div class="row">
-                                    <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    @if (session('message'))
                                         <div class="alert alert-success" role="alert">
                                             {{ session('message') }}
                                         </div>
-                                    </div>
+                                    @endif
+                                    @if (session('danger'))
+                                        <div class="alert alert-danger" role="alert">
+                                            {{ session('danger') }}
+                                        </div>
+                                    @endif
                                 </div>
-                            @endif
+                            </div>
                             <div class="card-header">
                                 <h3 class="card-title">List Product</h3>
                                 <form id="searchForm" role="form" action="{{ route('admin.product.index') }}"
@@ -84,6 +89,52 @@
                     },
                     success: function(data) {
                         $('#table-content').html(data);
+                    }
+                });
+            });
+        });
+    </script>
+
+    {{-- Delete Product --}}
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#btn-delete").on("click", function(e) {
+                e.preventDefault();
+
+                Swal.fire({
+                    title: "Bạn có chắc chắn muốn xóa sản phẩm này?",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#4e73df",
+                    cancelButtonColor: "#e74a3b",
+                    confirmButtonText: "Tôi đồng ý!",
+                    cancelButtonText: "Hủy",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        var formAction = $("#form-delete").attr("action");
+                        var csrfToken = "{{ csrf_token() }}";
+
+                        $.ajax({
+                            url: formAction,
+                            type: "POST",
+                            data: {
+                                _method: "DELETE",
+                                _token: csrfToken,
+                            },
+                            success: function(response) {
+                                Swal.fire({
+                                    title: response.message,
+                                    icon: "success",
+                                    confirmButtonColor: "#4e73df",
+                                }).then(() => {
+                                    location.reload();
+                                });
+                            },
+                            error: function(xhr) {
+                                Swal.fire("Cảnh báo!", xhr.responseJSON.message,
+                                    "error");
+                            },
+                        });
                     }
                 });
             });

@@ -77,8 +77,8 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="dob">Date Of Birth</label>
-                                        <input type="date" name="dob" class="form-control" id="dob"
-                                            value="{{ old('dob') }}">
+                                        <input type="text" name="dob" class="form-control" id="dob"
+                                            value="{{ old('dob') }}" placeholder="Select your birthday">
                                         @error('dob')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -95,6 +95,19 @@
                                             </option>
                                         </select>
                                         @error('role')
+                                            <span class="text-danger">{{ $message }}<span>
+                                                @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="status">Status</label>
+                                        <select name="status" class="form-control" id="status">
+                                            <option value="">---Please Select---</option>
+                                            <option {{ old('status') == '0' ? 'selected' : '' }} value="0">Block
+                                            </option>
+                                            <option {{ old('status') == '1' ? 'selected' : '' }} value="1">Active
+                                            </option>
+                                        </select>
+                                        @error('status')
                                             <span class="text-danger">{{ $message }}<span>
                                                 @enderror
                                     </div>
@@ -117,4 +130,14 @@
 @endsection
 
 @section('script')
+    <!--Format DOB-->
+    <script>
+        $(document).ready(function() {
+            $('#dob').datepicker({
+                format: 'dd/mm/yyyy',
+                autoclose: true,
+                todayHighlight: true
+            });
+        });
+    </script>
 @endsection

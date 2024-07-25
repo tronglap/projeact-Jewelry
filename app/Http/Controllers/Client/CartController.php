@@ -40,53 +40,73 @@ class CartController extends Controller
         $product = Product::find($productId);
 
         if (!$product) {
-            return response()->json(['message' => 'Product not found!'], 404);
+            return response()->json(['message' => 'Không tìm thấy sản phẩm!'], 404);
+        }
+
+        $cart = session()->get('cart', []);
+
+        if (isset($cart[$productId])) {
+            if ($cart[$productId]['quantity'] >= 5) {
+                return response()->json(['message' => 'Sản phẩm đã đạt số lượng tối đa. Không thể thêm nữa.'], 400);
+            }
+            $cart[$productId]['quantity']++;
         } else {
-            $cart = session()->get('cart', []);
-
-
+            if (count($cart) >= 5) {
+                return response()->json(['message' => 'Giỏ hàng đã đầy. Không thể thêm sản phẩm mới.'], 400);
+            }
             $cart[$productId] = [
                 'name' => $product->name,
                 'image_url' => $product->image_url,
-                'quantity' => isset($cart[$productId]) ? ($cart[$productId]['quantity'] + 1) : 1,
+                'quantity' => 1,
                 'price' => $product->price,
                 'promotion' => $product->promotion ?? null
             ];
-
-
-            $totalProducts = count($cart);
-            $totalPrice = array_sum(array_map(function ($item) {
-                return ($item['promotion'] ?? $item['price']) * $item['quantity'];
-            }, $cart));
-
-            // Save in Session
-            session()->put('cart', $cart);
-            return response()->json([
-                'message' => 'Add Product To Cart Success',
-                'totalProducts' => $totalProducts,
-                'totalPrice' => number_format($totalPrice, 2, '.', ',')
-            ]);
         }
+
+        $totalProducts = count($cart);
+        $totalPrice = array_sum(array_map(function ($item) {
+            return ($item['promotion'] ?? $item['price']) * $item['quantity'];
+        }, $cart));
+
+        session()->put('cart', $cart);
+
+        return response()->json([
+            'message' => 'Thêm sản phẩm vào giỏ hàng thành công!',
+            'totalProducts' => $totalProducts,
+            'totalPrice' => number_format($totalPrice, 2, '.', ',')
+        ]);
     }
 
     public function addProductItem(Request $request, string $productId)
     {
         $qty = $request->qty;
 
+        if ($qty <= 0) {
+            throw new Exception("Số lượng sản phẩm phải lớn hơn 0.");
+        }
+
         $cart = session()->get('cart', []);
 
         if (array_key_exists($productId, $cart)) {
-            if ($qty <= 0) {
-                unset($cart[$productId]);
-            } else {
-                $cart[$productId]['quantity'] = $qty;
+            if ($qty > 5) {
+                return response()->json(['message' => 'Sản phẩm chỉ được mua tối đa 5 món.'], 400);
             }
+
+            $cart[$productId]['quantity'] = $qty;
+
+            $totalPrice = array_sum(array_map(function ($item) {
+                return ($item['promotion'] ?? $item['price']) * $item['quantity'];
+            }, $cart));
+
             session()->put('cart', $cart);
+
+            return response()->json([
+                'message' => 'Cập nhật sản phẩm trong giỏ hàng thành công',
+                'totalPrice' => number_format($totalPrice, 2, '.', ',')
+            ]);
         } else {
             throw new Exception("Không thể cập nhật sản phẩm trong giỏ hàng");
         }
-
-        return response()->json(['message' => 'Cập nhật sản phẩm trong giỏ hàng thành công']);
     }
 
     public function getCartTotal()
@@ -122,7 +142,7 @@ class CartController extends Controller
             return response()->json([
                 'totalProducts' => $totalProducts,
                 'totalPrice' => number_format($totalPrice, 2, '.', ','),
-                'message' => 'Remove product success!'
+                'message' => 'Xóa sản phẩm thành công!'
             ]);
         } else {
             throw new Exception("Can not remove this!");
@@ -148,7 +168,7 @@ class CartController extends Controller
                 $orderItem->order_id = $order->id;
                 $orderItem->product_id = $productId;
                 $orderItem->name = $item['name'];
-                $orderItem->image = $item['image'] ?? null;
+                $orderItem->image = $item['image_url'] ?? null;
                 $orderItem->quantity = $item['quantity'];
                 $orderItem->price = $item['price'];
                 $orderItem->promotion = $item['promotion'] ?? null;

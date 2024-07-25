@@ -14,4 +14,9 @@ class Product extends Model
     {
         return $this->belongsTo(ProductCategory::class, 'product_category_id')->withTrashed();
     }
+
+    public function orderItems()
+    {
+        return $this->hasMany(OrderItem::class, 'product_id');
+    }
 }

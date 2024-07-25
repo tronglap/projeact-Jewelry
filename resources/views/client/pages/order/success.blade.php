@@ -15,7 +15,8 @@
                 to="Success"></x-client.breadcrumb>
         </div>
         <div class="container">
-            <h1>Order Success</h1>
+            <h1 class="title">Order Success</h1>
+            <p class="notification">Your order has been placed successfully, please check mail!</p>
             <a href="{{ route('home.shop') }}" class="btn-proceed">
                 <x-client.button title="Continue shopping" type="submit"></x-client.button>
             </a>

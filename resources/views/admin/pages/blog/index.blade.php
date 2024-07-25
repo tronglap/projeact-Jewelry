@@ -92,4 +92,50 @@
             });
         });
     </script>
+
+    {{-- Delete Blog --}}
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#btn-delete").on("click", function(e) {
+                e.preventDefault();
+
+                Swal.fire({
+                    title: "Bạn có chắc chắn muốn xóa bài viết này?",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#4e73df",
+                    cancelButtonColor: "#e74a3b",
+                    confirmButtonText: "Tôi đồng ý!",
+                    cancelButtonText: "Hủy",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        var formAction = $("#form-delete").attr("action");
+                        var csrfToken = "{{ csrf_token() }}";
+
+                        $.ajax({
+                            url: formAction,
+                            type: "POST",
+                            data: {
+                                _method: "DELETE",
+                                _token: csrfToken,
+                            },
+                            success: function(response) {
+                                Swal.fire({
+                                    title: response.message,
+                                    icon: "success",
+                                    confirmButtonColor: "#4e73df",
+                                }).then(() => {
+                                    location.reload();
+                                });
+                            },
+                            error: function(xhr) {
+                                Swal.fire("Cảnh báo!", xhr.responseJSON.message,
+                                    "error");
+                            },
+                        });
+                    }
+                });
+            });
+        });
+    </script>
 @endsection

@@ -1,0 +1,22 @@
+.position-tab {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding-bottom: 2%;
+}
+
+.nav-item:hover {
+    border-radius: 2px
+}
+
+.nav-item .nav-link {
+    color: black;
+    border-radius: 2px;
+}
+
+.nav-item .nav-link.active {
+    color: white;
+    font-weight: bold;
+    background-color: #1f2937;
+}

@@ -30,23 +30,31 @@
                     <div class="col-md-12">
                         <!-- general form elements -->
                         <div class="card card-primary">
-                            @if (session('message'))
-                                <div class="row">
-                                    <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    @if (session('message'))
                                         <div class="alert alert-success" role="alert">
                                             {{ session('message') }}
                                         </div>
-                                    </div>
+                                    @endif
+                                    @if (session('danger'))
+                                        <div class="alert alert-danger" role="alert">
+                                            {{ session('danger') }}
+                                        </div>
+                                    @endif
                                 </div>
-                            @endif
-                            <div class="card-header">
-                                <h3 class="card-title">Product Category</h3>
+                            </div>
+                            <div class="card-footer" style="background: transparent">
+                                <a href="{{ route('admin.product_category.index') }}">
+                                    <button type="submit" class="btn btn-primary">Back to list</button>
+                                </a>
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->
                             <form role="form" method="post"
                                 action="{{ route('admin.product_category.update', ['productCategory' => $data->id]) }}">
                                 <div class="card-body">
+                                    <p>Created at: {{ $data['created_at'] }}</p>
                                     <div class="form-group">
                                         <label for="name">Name</label>
                                         <input type="text" name="name" value="{{ old('name') ?? $data->name }}"
@@ -83,7 +91,7 @@
 
                                 <div class="card-footer">
                                     @csrf
-                                    <button type="submit" class="btn btn-primary">Update</button>
+                                    <button type="submit" class="btn btn-success">Update</button>
                                 </div>
                             </form>
                         </div>

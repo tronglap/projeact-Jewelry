@@ -22,35 +22,66 @@ class ProductUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required',
+            'name' => 'required|min:3|max:255',
+            'name.min' => 'Tên tối thiểu 3 ký tự!',
+            'name.max' => 'Tên tối đa 255 ký tự!',
             'slug' => 'required',
-            'price' => 'required|regex:/^\d{1,5}(\.\d{1,2})?$/',
-            'promotion' => 'nullable|regex:/^\d{1,6}(\.\d{1,2})?$/',
-            'quantity' => 'required',
-            'description' => 'required',
+            'price' => 'required|regex:/^\d{1,6}(\.\d{1,2})?$/',
+            'promotion' => 'nullable|regex:/^\d{1,6}(\.\d{1,2})?$/|lt:price',
+            'quantity' => 'required|integer|min:21',
             'status' => 'required',
             'product_category_id' => 'required',
+            'image_url' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image_url_second' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'sale' => 'nullable|boolean',
         ];
     }
 
     public function messages(): array
     {
         return [
-            'name.required' => 'The name is required',
-            'slug.required' => 'The slug is required',
-            'price.required' => 'The price is required',
-            'price.regex' => 'The price must be a valid decimal with up to 6 digits in the integer part and 2 digits in the decimal part.',
-            'promotion.regex' => 'The promotion must be a valid decimal with up to 6 digits in the integer part and 2 digits in the decimal part.',
-            'quantity.required' => 'The quantity is required',
-            'description.required' => 'The description is required',
-            'status.required' => 'The status is required',
-            'product_category_id.required' => 'The product category is required',
+            'name.required' => 'Tên sản phẩm không được trống',
+            'slug.required' => 'Slug không được trống',
+            'price.required' => 'Giá sản phẩm không được trống',
+            'price.regex' => 'Giá sản phẩm phải là số thập phân hợp lệ với tối đa 6 chữ số ở phần nguyên và 2 chữ số ở phần thập phân.',
+            'promotion.required' => 'Giá giảm không được trống',
+            'promotion.regex' => 'Khuyến mãi phải là số thập phân hợp lệ với tối đa 6 chữ số ở phần nguyên và 2 chữ số ở phần thập phân.',
+            'promotion.lt' => 'Giá khuyến mãi phải nhỏ hơn giá sản phẩm.',
+            'quantity.required' => 'Số lượng không được trống',
+            'quantity.min' => 'Số lượng phải lớn hơn 20',
+            'status.required' => 'Trạng thái không được trống',
+            'product_category_id.required' => 'Danh mục sản phẩm không được trống',
+            'image_url.image' => 'Tệp phải là hình ảnh',
+            'image_url.mimes' => 'Hình ảnh phải có định dạng jpeg, png, jpg, hoặc gif',
+            'image_url.max' => 'Hình ảnh phải có kích thước tối đa là 2MB',
+            'image_url_second.image' => 'Tệp phải là hình ảnh',
+            'image_url_second.mimes' => 'Hình ảnh thứ hai phải có định dạng jpeg, png, jpg, hoặc gif',
+            'image_url_second.max' => 'Hình ảnh thứ hai phải có kích thước tối đa là 2MB',
+            'sale.boolean' => 'Trường khuyến mãi phải là đúng hoặc sai',
+            'salePercent.numeric' => 'Phần trăm giảm giá phải là số.',
+            'salePercent.min' => 'Phần trăm giảm giá phải ít nhất là 0%.',
+            'salePercent.max' => 'Phần trăm giảm giá không được vượt quá 100%.',
         ];
     }
+
     protected function withValidator($validator)
     {
         $validator->sometimes('promotion', 'required', function ($input) {
             return $input->sale == '1';
+        });
+
+        $validator->sometimes('salePercent', 'nullable|numeric|min:0|max:100', function ($input) {
+            return $input->sale == '1';
+        });
+
+        $validator->after(function ($validator) {
+            if ($this->sale == '1') {
+                if ($this->promotion >= $this->price) {
+                    $validator->errors()->add('promotion', 'Giá khuyến mãi phải nhỏ hơn giá sản phẩm.');
+                }
+            } else {
+                $this->merge(['salePercent' => null, 'promotion' => null]);
+            }
         });
     }
 }
